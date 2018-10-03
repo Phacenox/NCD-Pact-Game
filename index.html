@@ -5,6 +5,7 @@
     <title>Learning Phaser</title>
 	<script type="text/javascript" src="js/phaser.min.js"></script>
 	<script type="text/javascript" src="js/preloadState.js"></script>
+	<script type="text/javascript" src="js/startState.js"></script>
 	<script type="text/javascript" src="js/gameplayState.js"></script>
     <style type="text/css">
         body {
@@ -16,9 +17,10 @@
 
 <script type="text/javascript">
 
-	let game = new Phaser.Game(800, 600, Phaser.AUTO);
+	let game = new Phaser.Game(2436, 1125, Phaser.AUTO);
 	
 	game.state.add("Preload", preloadState);
+	game.state.add("Start", startState);
 	game.state.add("Game", gameplayState);
 	game.state.start("Preload");
 	
