@@ -14,10 +14,17 @@ pullOutMenu.prototype.create = function(){
 	this.items = game.add.group();
 	this.items.enableBody = true;
 	let _clibBoard = this.items.create(-915, 0, "clipboard");
-	
 	let _startButton = this.items.create(10, 465, "clipboardbutton");
 	_startButton.inputEnabled = true;
 	_startButton.events.onInputDown.add(this.actiononClick, this);
+    let _causeButton = this.items.create(-800,200, "causebutton");
+    let _causeButton2 = this.items.create(-600,200, "causebutton");
+    let _diseaseButton = this.items.create(-300,200, "diseasebutton");
+    let _causeButton3 = this.items.create(-800,400, "causebutton");
+    let _causeButton4 = this.items.create(-600,400, "causebutton");
+    let _diseaseButton2 = this.items.create(-300,400, "diseasebutton");
+    
+    
 	
 };
 

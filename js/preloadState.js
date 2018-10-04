@@ -9,6 +9,8 @@ preloadState.prototype.preload = function(){
 	game.load.image("star", "assets/star.png");
 	game.load.image("clipboard", "assets/clipboard.png");
 	game.load.image("clipboardbutton", "assets/clipboardButton.png");
+    game.load.image("causebutton","assets/CauseButton.png");
+    game.load.image("diseasebutton","assets/DiseaseButton.png");
 	game.load.spritesheet("murph", "assets/character.png", 32, 48);
 	
 	//our files
