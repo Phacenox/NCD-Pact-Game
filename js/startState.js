@@ -11,6 +11,8 @@ startState.prototype.create = function(){
 	_startButton.anchor.set(0,5);
 	_startButton.inputEnabled = true;
 	_startButton.events.onInputDown.add(actiononClick, this);
+    
+  this.Title = game.add.text(game.world.centerX-128, 100 , 'Title', { fontSize: '128px', fill: '#460'})
 	
 };
 
