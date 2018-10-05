@@ -7,11 +7,13 @@ gameplayState.prototype.preload = function(){
 };
 
 gameplayState.prototype.create = function(){
+    this.clipboard = new pullOutMenu();
+    this.clipboard.create();
+    
+    
     this.draggabletext = new draggableText();
     this.draggabletext.create();
-    
-    this.clipboard = new pullOutMenu();
-	this.clipboard.create();
+  
     
 
 };
