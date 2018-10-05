@@ -27,9 +27,6 @@ pullOutMenu.prototype.addButton = function(x, y, name){
 	return _startButton;
 }
 
-pullOutMenu.prototype.init = function(){
-	this.items.forEachAlive(this.moveAmount, this, -400);
-}
 
 pullOutMenu.prototype.update = function(){
 	if(this.animating !== 0){

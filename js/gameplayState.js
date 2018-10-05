@@ -7,6 +7,10 @@ gameplayState.prototype.preload = function(){
 };
 
 gameplayState.prototype.create = function(){
+	this.townArea = new townArea();
+	this.townArea.addPerson(0, 0, "star");
+	
+	
     this.clipboard = new pullOutMenu(915, 1);
     this.clipboard.create();
 	
@@ -31,4 +35,5 @@ gameplayState.prototype.create = function(){
 gameplayState.prototype.update = function(){
 	this.clipboard.update();
     this.draggabletext.update();
+	this.townArea.update();
 };
