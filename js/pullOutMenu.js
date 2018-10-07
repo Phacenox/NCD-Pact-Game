@@ -7,18 +7,24 @@ let pullOutMenu = function(distance, inverted){
 	
 	this.travelDistance = distance;
 	this.inverted = inverted;
+
+   
 };
 
 
 pullOutMenu.prototype.create = function(){
-	this.items = game.add.group();
+    this.items = game.add.group();
 	this.items.enableBody = true;
 };
 
 pullOutMenu.prototype.add = function(x, y, name){
 	return this.items.create(x, y, name);
 }
-
+pullOutMenu.prototype.addChild = function(sprite)
+{
+    return this.items.add(sprite);
+    
+}
 pullOutMenu.prototype.addButton = function(x, y, name){
 	let _startButton = this.items.create(x, y, name);
 	_startButton.inputEnabled = true;
