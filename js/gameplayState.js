@@ -7,16 +7,17 @@ gameplayState.prototype.preload = function(){
 };
 
 gameplayState.prototype.create = function(){
+	let numpeople = 12;
 	this.townArea = new townArea();
+	this.townArea.create(numpeople);
 	this.townArea.addPlace(game.world.centerX, game.world.centerY);
 	
 	let randompadding = 300;
-	for(var i = 0; i < 12; i++){
+	for(var i = 0; i < numpeople; i++){
 		let randx = (game.rnd.integer() % (game.world.width - 2*randompadding)) + randompadding;
 		let randy = (game.rnd.integer() % (game.world.height - 2*randompadding)) + randompadding;
-		this.townArea.addPerson(randx, randy, "star");
+		this.townArea.addPerson(i, randx, randy, "star");
 	}
-	
 	
     this.clipboard = new pullOutMenu(915, 1);
     this.clipboard.create();
