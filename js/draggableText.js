@@ -27,6 +27,12 @@ draggableText.prototype.add = function(x, y, name){
     
 };
 
+draggableText.prototype.addChild = function(sprite)
+{
+    return this.draggabletext.add(sprite);
+    
+};
+
 
 draggableText.prototype.update = function(){
 

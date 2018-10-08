@@ -25,6 +25,10 @@ pullOutMenu.prototype.addChild = function(sprite)
     return this.items.add(sprite);
     
 }
+pullOutMenu.prototype.removeChild = function(sprite)
+{
+    return this.items.removeChild(sprite);
+}
 pullOutMenu.prototype.addButton = function(x, y, name){
 	let _startButton = this.items.create(x, y, name);
 	_startButton.inputEnabled = true;

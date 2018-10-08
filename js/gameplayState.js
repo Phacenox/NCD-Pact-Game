@@ -31,6 +31,8 @@ gameplayState.prototype.create = function(){
     let causeText1 = this.draggablestuff.add(1600,200,"causetext");
     let causeText2 = this.draggablestuff.add(1600,400,"causetext");
     causeText1.events.onDragStop.add(onDragStop, this);
+    causeText2.events.onDragStop.add(onDragStop, this);
+
 
 };
 
@@ -38,9 +40,15 @@ gameplayState.prototype.create = function(){
 function onDragStop(sprite, pointer){
     if (pointer.x<this._clipboardButton.x)
     {
-        let causeText1 = this.clipboard.addChild(sprite);
+       sprite = this.clipboard.addChild(sprite);
+      
     }
-    
+   if (pointer.x>this._clipboardButton.x){
+   
+       sprite  = this.draggablestuff.addChild(sprite);
+
+       
+    }
     
 }
 
