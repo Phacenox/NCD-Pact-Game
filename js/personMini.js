@@ -10,7 +10,7 @@ let personMini = function(){
 	this.lastMouseY = 0;
 	
 	//index in creation array
-	this.indexval = -1;
+	this.index = -1;
 	
 	//pathing variables
 	this.places = [];
@@ -28,8 +28,12 @@ let personMini = function(){
 	this.busy = 0;
 };
 
-personMini.prototype.create = function(x, y, spritename, spriteval, index){
-	this.indexval = index;
+personMini.prototype.destroy = function(){
+	this.allParts.destroy(true);
+}
+
+personMini.prototype.create = function(index, x, y, spritename, spriteval){
+	this.index = index;
 	this.animationFrame = game.rnd.integer() % this.animationSpeed;
 	this.sprite = this.allParts.create(x, y, spritename);
 	this.hitbox = this.allParts.create(x, y, "platform");
