@@ -9,20 +9,41 @@ let personMini = function(){
 	this.lastMouseX = 0;
 	this.lastMouseY = 0;
 	
-	this.movex = 1;
-	this.movey = .5;
+	//index in creation array
+	this.indexval = -1;
+	
+	//pathing variables
+	this.places = [];
+	this.numplaces = 0;
+	
+	this.hasGoal = false;
+	this.goalx = 0;
+	this.goaly = 0;
+	this.goalIsBuilding = false;
+	this.movespeed = 1;
+	this.lastgoal = NaN;
+	
+	this.randompadding = 300;
+	
+	this.busy = 0;
 };
 
-
-personMini.prototype.create = function(x, y, spritename, spriteval){
+personMini.prototype.create = function(x, y, spritename, spriteval, index){
+	this.indexval = index;
 	this.animationFrame = game.rnd.integer() % this.animationSpeed;
 	this.sprite = this.allParts.create(x, y, spritename);
 	this.hitbox = this.allParts.create(x, y, "platform");
-	this.hitbox.alpha = .5;
+	this.hitbox.alpha = 0;
 	this.hitbox.inputEnabled = true;
 	this.hitbox.events.onInputDown.add(this.actiononClick, this);
 	this.hitbox.events.onInputUp.add(this.actiononClickUp, this);
+	return this.sprite;
 };
+
+personMini.prototype.initPathing = function(places, numplaces){
+	this.places = places;
+	this.numplaces = numplaces;
+}
 
 personMini.prototype.update = function(){
 	if(this.pickedUp === true){
@@ -30,7 +51,52 @@ personMini.prototype.update = function(){
 		this.lastMouseX = game.input.x;
 		this.lastMouseY = game.input.y;
 	}else{
-		this.allParts.forEachAlive(this.moveAmount, this, this.movex, this.movey);
+		//path
+		if(!this.hasGoal){
+			let goalval = game.rnd.integer() % (this.numplaces + 1);
+			goalval -= 1;
+			while (goalval === this.lastgoal){
+				goalval = game.rnd.integer() % (this.numplaces + 1);
+				goalval -= 1;
+			}
+			this.lastgoal = goalval;
+			if(goalval < 0){
+				this.goalx = game.rnd.integer() % (game.world.width - 2*this.randompadding);
+				this.goalx += this.randompadding;
+				this.goaly = game.rnd.integer() % (game.world.height - 2*this.randompadding);
+				this.goaly += this.randompadding;
+				this.goalIsBuilding = false;
+			}else{
+				this.goalx = this.places[goalval*2];
+				this.goaly = this.places[(goalval*2) + 1];
+				this.goalIsBuilding = true;
+			}
+			
+			this.hasGoal = true;
+		}
+		if(this.busy > 0){
+			if(this.busy === 1)
+				this.sprite.alpha = 1;
+			this.busy--;
+		}else{
+			//check if reached goal
+			let diffx = this.goalx - (this.sprite.x + this.sprite.width/2);
+			let diffy = this.goaly - (this.sprite.y + this.sprite.height/2);
+			let mag = Math.sqrt(Math.pow(diffx, 2) + Math.pow(diffy, 2));
+			if(mag < this.movespeed){
+				if(this.goalIsBuilding === true){
+					this.sprite.alpha = 0;
+				}
+				//make not exist for a few seconds
+				this.hasGoal = false;
+				//4 seconds of busyness
+				this.busy = 240;
+			}else{
+				let movex = this.movespeed*diffx/mag;
+				let movey = this.movespeed*diffy/mag;
+				this.allParts.forEachAlive(this.moveAmount, this, movex, movey);
+			}
+		}
 	}
 	
 		this.allParts.forEachAlive(this.animate, this);
@@ -57,12 +123,15 @@ personMini.prototype.animate = function(item){
 	item.body.y -= movement;
 }
 
+//todo: create a copy of the sprite object that appears over everything else
 personMini.prototype.actiononClick = function(){
 	this.lastMouseX = game.input.x;
 	this.lastMouseY = game.input.y;
 	this.pickedUp = true;
 };
 
+//todo: remove that sprite
+//todo: check collision with the drop box, if collision, send data and destroy self
 personMini.prototype.actiononClickUp = function(){
 	this.pickedUp = false;
 };

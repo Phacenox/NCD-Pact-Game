@@ -8,7 +8,14 @@ gameplayState.prototype.preload = function(){
 
 gameplayState.prototype.create = function(){
 	this.townArea = new townArea();
-	this.townArea.addPerson(0, 0, "star");
+	this.townArea.addPlace(game.world.centerX, game.world.centerY);
+	
+	let randompadding = 300;
+	for(var i = 0; i < 12; i++){
+		let randx = (game.rnd.integer() % (game.world.width - 2*randompadding)) + randompadding;
+		let randy = (game.rnd.integer() % (game.world.height - 2*randompadding)) + randompadding;
+		this.townArea.addPerson(randx, randy, "star");
+	}
 	
 	
     this.clipboard = new pullOutMenu(915, 1);
