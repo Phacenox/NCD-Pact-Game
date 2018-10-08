@@ -32,10 +32,14 @@ gameplayState.prototype.create = function(){
     let causeText2 = this.draggablestuff.add(1600,400,"causetext");
     causeText1.events.onDragStop.add(onDragStop, this);
     causeText2.events.onDragStop.add(onDragStop, this);
-
-
+    causeText1.events.onInputDown.add(onInputDown,this);
+    causeText2.events.onInputDown.add(onInputDown,this);
 };
 
+function onInputDown(sprite, pointer)
+{
+   sprite.loadTexture("causetext2");
+}
 
 function onDragStop(sprite, pointer){
     if (pointer.x<this._clipboardButton.x)
@@ -52,6 +56,13 @@ function onDragStop(sprite, pointer){
     
 }
 
+//function onDragStart(sprite,pointer,x,y){
+  //  if (pointer.x<1600){
+  //     // sprite = this.draggablestuff.add(1600,200,"causetext2");
+        
+   // }
+    
+//}
 
 gameplayState.prototype.update = function(){
 	  this.draggablestuff.update();
