@@ -31,7 +31,6 @@ townArea.prototype.addPerson = function(index, x, y, spritename, spriteval){
 	_person.initPathing(this.places, this.numplaces);
 	_person.create(index, x, y, spritename, spriteval);
 	this.people[index] = _person;
-	console.log(this.people);
 	return _person;
 }
 

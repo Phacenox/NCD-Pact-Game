@@ -136,6 +136,7 @@ personMini.prototype.actiononClick = function(){
 
 //todo: remove that sprite
 //todo: check collision with the drop box, if collision, send data and destroy self
+//idea, set variable in this class, on next frame return an index value through update.
 personMini.prototype.actiononClickUp = function(){
 	this.pickedUp = false;
 };
