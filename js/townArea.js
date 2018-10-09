@@ -26,10 +26,10 @@ townArea.prototype.addPlace = function(x, y){
 }
 //after adding places, it is assumed to be read only.
 
-townArea.prototype.addPerson = function(index, x, y, spritename, spriteval){
+townArea.prototype.addPerson = function(index, x, y, spritename, personInfoButton){
 	let _person = new personMini();
 	_person.initPathing(this.places, this.numplaces);
-	_person.create(index, x, y, spritename, spriteval);
+	_person.create(index, x, y, spritename, personInfoButton);
 	this.people[index] = _person;
 	return _person;
 }
@@ -40,8 +40,15 @@ townArea.prototype.removePerson = function(index){
 }
 
 townArea.prototype.update = function(){
+	let retval = -1;
 	for(var i = 0; i < this.numpeople; i++){
-		if(this.people[i] != 0)
-			this.people[i].update();
+		if(this.people[i] != 0){
+			if(retval === -1){
+				retval = this.people[i].update();
+			}else{
+				this.people[i].update()
+			}
+		}
 	}
+	return retval;
 };

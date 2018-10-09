@@ -11,7 +11,6 @@ let pullOutMenuRight = function(distance, inverted){
    
 };
 
-
 pullOutMenuRight.prototype.create = function(){
     this.items = game.add.group();
 	this.items.enableBody = true;
@@ -60,6 +59,17 @@ pullOutMenuRight.prototype.smoothEquation = function(x){
 	y += 2*Math.pow(x-1, 2);
 	y /= this.functionStrength;
 	return y;
+}
+
+pullOutMenuRight.prototype.openMenu = function(){
+	if(this.animating === 0){
+		if(!this.opened){
+			this.animating = 1;
+			this.opened = true;
+		}
+		return true;
+	}
+	return false;
 }
 
 pullOutMenuRight.prototype.actiononClick = function(){

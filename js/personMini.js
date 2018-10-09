@@ -26,13 +26,15 @@ let personMini = function(){
 	this.randompadding = 300;
 	
 	this.busy = 0;
+	this.dataquery = false;
 };
 
 personMini.prototype.destroy = function(){
 	this.allParts.destroy(true);
 }
 
-personMini.prototype.create = function(index, x, y, spritename, spriteval){
+personMini.prototype.create = function(index, x, y, spritename, personInfoButton){
+	this.personInfoButton = personInfoButton;
 	this.index = index;
 	this.animationFrame = game.rnd.integer() % this.animationSpeed;
 	this.sprite = this.allParts.create(x, y, spritename);
@@ -50,6 +52,9 @@ personMini.prototype.initPathing = function(places, numplaces){
 }
 
 personMini.prototype.update = function(){
+	if(this.dataquery){
+		return this.index;
+	}
 	if(this.pickedUp === true){
 		this.allParts.forEachAlive(this.followMouse, this);
 		this.lastMouseX = game.input.x;
@@ -105,6 +110,7 @@ personMini.prototype.update = function(){
 	
 		this.allParts.forEachAlive(this.animate, this);
 		this.animationFrame++;
+	return -1;
 };
 
 personMini.prototype.followMouse = function(item){
@@ -139,4 +145,9 @@ personMini.prototype.actiononClick = function(){
 //idea, set variable in this class, on next frame return an index value through update.
 personMini.prototype.actiononClickUp = function(){
 	this.pickedUp = false;
+	if(this.hitbox.x + this.hitbox.width > this.personInfoButton.x && this.hitbox.y + this.hitbox.height > this.personInfoButton.y){
+		if(this.hitbox.x < this.personInfoButton.x + this.personInfoButton.width && this.hitbox.y < this.personInfoButton.y + this.personInfoButton.height){
+			this.dataquery = true;
+		}
+	}
 };

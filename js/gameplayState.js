@@ -1,9 +1,10 @@
 let gameplayState = function(){
 	this.score = 0;
+	this.currentPerson = -1;
 };
 
 gameplayState.prototype.preload = function(){
-    
+    //data is stored with integers in mind, 
 };
 
 gameplayState.prototype.create = function(){
@@ -12,17 +13,20 @@ gameplayState.prototype.create = function(){
 	this.townArea.create(numpeople);
 	this.townArea.addPlace(game.world.centerX, game.world.centerY);
 	
+	this.personInfo = new pullOutMenuRight(915, -1);
+    this.personInfo.create();
+	this.personInfo.add(game.world.width - 63 - 20, 0, "clipboardright");
+	this._personInfoButton = this.personInfo.addButton(game.world.width - 63 -10, 465, "clipboardbutton");
+	
 	let randompadding = 300;
 	for(var i = 0; i < numpeople; i++){
 		let randx = (game.rnd.integer() % (game.world.width - 2*randompadding)) + randompadding;
 		let randy = (game.rnd.integer() % (game.world.height - 2*randompadding)) + randompadding;
-		this.townArea.addPerson(i, randx, randy, "star");
+		this.townArea.addPerson(i, randx, randy, "star", this._personInfoButton);
 	}
 	
     this.clipboard = new pullOutMenu(915, 1);
     this.clipboard.create();
-	this.personInfo = new pullOutMenu(915, -1);
-    this.personInfo.create();
 	   
     
     this.draggablestuff = new draggableText();
@@ -31,8 +35,6 @@ gameplayState.prototype.create = function(){
 	this.clipboard.add(-915, 0, "clipboard");
 	this._clipboardButton = this.clipboard.addButton(10, 465, "clipboardbutton");
 	
-	this.personInfo.add(game.world.width - 63 - 20, 0, "clipboardright");
-	this._personInfoButton = this.personInfo.addButton(game.world.width - 63 -10, 465, "clipboardbutton");
 	
     let _causeButton1 = this.clipboard.add(-800,200, "causebutton");
     let _causeButton2 = this.clipboard.add(-600,200, "causebutton");
@@ -82,5 +84,13 @@ gameplayState.prototype.update = function(){
 	  this.draggablestuff.update();
 	this.clipboard.update();
 	this.personInfo.update();
-	this.townArea.update();
+	let personquery = this.townArea.update();
+	if(personquery != -1){
+		if(this.currentPerson != -1){
+			//TODO: add old person
+		}
+		this.currentPerson = personquery;
+		this.personInfo.openMenu();
+		this.townArea.removePerson(this.currentPerson);
+	}
 };
