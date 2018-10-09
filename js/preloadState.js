@@ -16,6 +16,7 @@ preloadState.prototype.preload = function(){
     game.load.image("causebutton","assets/causebutton.png");
     game.load.image("diseasebutton","assets/diseasebutton.png");
     game.load.image("clipboard", "assets/clipboard.png");
+	game.load.image("clipboardright", "assets/clipboardRight.png");
     game.load.image("clipboardbutton", "assets/clipboardButton.png");
     };
 

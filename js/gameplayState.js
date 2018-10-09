@@ -21,6 +21,8 @@ gameplayState.prototype.create = function(){
 	
     this.clipboard = new pullOutMenu(915, 1);
     this.clipboard.create();
+	this.personInfo = new pullOutMenu(915, -1);
+    this.personInfo.create();
 	   
     
     this.draggablestuff = new draggableText();
@@ -28,6 +30,9 @@ gameplayState.prototype.create = function(){
     
 	this.clipboard.add(-915, 0, "clipboard");
 	this._clipboardButton = this.clipboard.addButton(10, 465, "clipboardbutton");
+	
+	this.personInfo.add(game.world.width - 63 - 20, 0, "clipboardright");
+	this._personInfoButton = this.personInfo.addButton(game.world.width - 63 -10, 465, "clipboardbutton");
 	
     let _causeButton1 = this.clipboard.add(-800,200, "causebutton");
     let _causeButton2 = this.clipboard.add(-600,200, "causebutton");
@@ -37,17 +42,22 @@ gameplayState.prototype.create = function(){
     let _diseaseButton2 = this.clipboard.add(-300,400, "diseasebutton");
   
     
-    let causeText1 = this.draggablestuff.add(1600,200,"causetext");
-    let causeText2 = this.draggablestuff.add(1600,400,"causetext");
+    let causeText1 = this.draggablestuff.add(1600,200,"causetext2");
+    let causeText2 = this.draggablestuff.add(1600,400,"causetext2");
     causeText1.events.onDragStop.add(onDragStop, this);
     causeText2.events.onDragStop.add(onDragStop, this);
     causeText1.events.onInputDown.add(onInputDown,this);
     causeText2.events.onInputDown.add(onInputDown,this);
+    this.toggle = true;
 };
 
 function onInputDown(sprite, pointer)
 {
-   sprite.loadTexture("causetext2");
+  // sprite.loadTexture("causetext2");
+    if (this.toggle===true){
+        this.causetextbutton = this.draggablestuff.add(sprite.x, sprite.y, "causetext");
+       this.toggle = false;
+    }
 }
 
 function onDragStop(sprite, pointer){
@@ -76,5 +86,6 @@ function onDragStop(sprite, pointer){
 gameplayState.prototype.update = function(){
 	  this.draggablestuff.update();
 	this.clipboard.update();
+	this.personInfo.update();
 	this.townArea.update();
 };
