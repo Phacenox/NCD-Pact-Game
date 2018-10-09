@@ -21,6 +21,8 @@ gameplayState.prototype.create = function(){
 	
     this.clipboard = new pullOutMenu(915, 1);
     this.clipboard.create();
+	this.personInfo = new pullOutMenu(915, -1);
+    this.personInfo.create();
 	   
     
     this.draggablestuff = new draggableText();
@@ -28,6 +30,9 @@ gameplayState.prototype.create = function(){
     
 	this.clipboard.add(-915, 0, "clipboard");
 	this._clipboardButton = this.clipboard.addButton(10, 465, "clipboardbutton");
+	
+	this.personInfo.add(game.world.width - 63 - 20, 0, "clipboardright");
+	this._personInfoButton = this.personInfo.addButton(game.world.width - 63 -10, 465, "clipboardbutton");
 	
     let _causeButton1 = this.clipboard.add(-800,200, "causebutton");
     let _causeButton2 = this.clipboard.add(-600,200, "causebutton");
@@ -76,5 +81,6 @@ function onDragStop(sprite, pointer){
 gameplayState.prototype.update = function(){
 	  this.draggablestuff.update();
 	this.clipboard.update();
+	this.personInfo.update();
 	this.townArea.update();
 };
