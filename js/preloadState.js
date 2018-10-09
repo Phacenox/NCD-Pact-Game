@@ -18,6 +18,7 @@ preloadState.prototype.preload = function(){
     game.load.image("clipboard", "assets/clipboard.png");
 	game.load.image("clipboardright", "assets/clipboardRight.png");
     game.load.image("clipboardbutton", "assets/clipboardButton.png");
+	game.load.image("town1", "assets/town1.png");
     };
 
 preloadState.prototype.create = function(){

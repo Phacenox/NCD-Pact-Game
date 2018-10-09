@@ -7,6 +7,8 @@ gameplayState.prototype.preload = function(){
 };
 
 gameplayState.prototype.create = function(){
+	game.add.sprite(0, 0, "town1");
+	
 	let numpeople = 12;
 	this.townArea = new townArea();
 	this.townArea.create(numpeople);
