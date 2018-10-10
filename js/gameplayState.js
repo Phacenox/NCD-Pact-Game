@@ -35,14 +35,19 @@ gameplayState.prototype.create = function(){
 	
 	this.personInfo.add(game.world.width - 63 - 20, 0, "clipboardright");
 	this._personInfoButton = this.personInfo.addButton(game.world.width - 63 -10, 465, "clipboardbutton");
-	
-    let _causeButton1 = this.clipboard.add(-800,200, "causebutton");
-    let _causeButton2 = this.clipboard.add(-600,200, "causebutton");
-    let _diseaseButton1 = this.clipboard.add(-300,200, "diseasebutton");
-    let _causeButton3 = this.clipboard.add(-800,400, "causebutton");
-    let _causeButton4 = this.clipboard.add(-600,400, "causebutton");
-    let _diseaseButton2 = this.clipboard.add(-300,400, "diseasebutton");
-  
+	//generating cause blank button for the first column
+    for(var i=0; i< 4; i++){
+        this.clipboard.addBlankButton(-810, 200+200*i, "causebutton", i);
+     }
+    //generating cause blank button for the second column
+    for(var i=4; i< 8; i++){
+        this.clipboard.addBlankButton(-610, 200+200*(i-4), "causebutton", i);
+    }
+    //generating disease button
+    for(var i=8; i< 12; i++){
+        this.clipboard.addBlankButton(-300, 200+200*(i-8), "diseasebutton", i);
+    }
+    
     
     let causeText1 = this.draggablestuff.add(1600,200,"causetext2");
     let causeText2 = this.draggablestuff.add(1600,400,"causetext2");
@@ -63,12 +68,29 @@ function onInputDown(sprite, pointer)
 }
 
 function onDragStop(sprite, pointer){
-    if (pointer.x<this._clipboardButton.x)
-    {
-       sprite = this.clipboard.addChild(sprite);
+    sprite = this.clipboard.addChild(sprite);
+    if (sprite.x<this._clipboardButton.x)
+   {
       
+  if (sprite.x>306.4){
+    
+      console.log(sprite.x);
+        sprite.x =306.4;
+       }
+       else if (sprite.x> 104 && sprite.x< 306.4){
+
+           console.log(sprite.x);
+
+           sprite.x = 104;
+      }
+        else if (sprite.x< 104){
+        
+            console.log(sprite.x);
+
+              sprite.x = 104;
+      }
     }
-   if (pointer.x>this._clipboardButton.x){
+   if (sprite.x>this._clipboardButton.x){
    
        sprite  = this.draggablestuff.addChild(sprite);
 
@@ -77,13 +99,7 @@ function onDragStop(sprite, pointer){
     
 }
 
-//function onDragStart(sprite,pointer,x,y){
-  //  if (pointer.x<1600){
-  //     // sprite = this.draggablestuff.add(1600,200,"causetext2");
-        
-   // }
-    
-//}
+
 
 gameplayState.prototype.update = function(){
 	  this.draggablestuff.update();
