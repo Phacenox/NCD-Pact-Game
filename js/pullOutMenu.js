@@ -26,6 +26,7 @@ pullOutMenu.prototype.addBlankButton = function(x,y,name,index)
     let causeButton = this.items.create(x,y,name,index);
     this.index = index;
     this.causeButton[index]= causeButton;
+    this.causeButton.enableBody = true;
     return causeButton;
     
 };

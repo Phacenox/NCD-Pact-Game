@@ -11,7 +11,7 @@ draggableText.prototype.create = function(){
 
   this.draggabletext = game.add.group();
 
- 
+    this.draggabletext.enableBody = true;
 
                                     
 
@@ -23,6 +23,7 @@ draggableText.prototype.add = function(x, y, name){
     let text = this.draggabletext.create(x, y, name);
   text.inputEnabled = true;
   text.input.enableDrag();
+
  //  text.input.enableSnap(100,100,true,true);
     return text;
     
