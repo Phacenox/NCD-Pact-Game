@@ -11,19 +11,19 @@ let pullOutMenuRight = function(distance, inverted){
 };
 
 pullOutMenuRight.prototype.initData = function(){
-	this.picture = this.items.create(3000, 200);
+	this.picture = this.items.create(3120, 200);
 	this.picture.scale.setTo(4, 4)
-	this.nametext = game.add.text(2500, 200, "----------------------------------------", 16);
+	this.nametext = game.add.text(2500, 200, "", 16);
 	this.items.add(this.nametext);
-	this.textA = game.add.text(2650, 500, "--------------------------------------------------------------------------------", 16);
+	this.textA = game.add.text(2650, 500, "", 16);
 	this.items.add(this.textA);
-	this.textB = game.add.text(2650, 625, "--------------------------------------------------------------------------------", 16);
+	this.textB = game.add.text(2650, 625, "", 16);
 	this.items.add(this.textB);
-	this.textC = game.add.text(2650, 750, "--------------------------------------------------------------------------------", 16);
+	this.textC = game.add.text(2650, 750, "", 16);
 	this.items.add(this.textC);
-	this.textD = game.add.text(2650, 875, "--------------------------------------------------------------------------------", 16);
+	this.textD = game.add.text(2650, 875, "", 16);
 	this.items.add(this.textD);
-	this.textE = game.add.text(2650, 1000, "--------------------------------------------------------------------------------", 16);
+	this.textE = game.add.text(2650, 1000, "", 16);
 	this.items.add(this.textE);
 }
 
