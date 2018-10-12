@@ -76,23 +76,37 @@ function onDragStop(sprite, pointer){
     if (sprite.x<this._clipboardButton.x)
    {
       
-  if (sprite.x>306.4){
+  if (sprite.x>this.causeButton[4].x-100){
     
-      console.log(sprite.x);
-        sprite.x =306.4;
+    //  console.log(sprite.x);
+     
+        sprite.x =this.causeButton[4].x;
        }
-       else if (sprite.x> 104 && sprite.x< 306.4){
+       else if (sprite.x< this.causeButton[4].x-100){
 
-           console.log(sprite.x);
+         //  console.log(sprite.x);
 
-           sprite.x = 104;
+           sprite.x = this.causeButton[0].x;
       }
-        else if (sprite.x< 104){
-        
-            console.log(sprite.x);
+   
+        if(sprite.y<this.causeButton[1].y-100){
+       
+           sprite.y =this.causeButton[0].y;
+       }
+       else if(sprite.y>this.causeButton[1].y-100 && sprite.y<this.causeButton[2].y-100){
+           
+           sprite.y =this.causeButton[1].y;
+       }
 
-              sprite.x = 104;
-      }
+       else if (sprite.y>this.causeButton[2].y-100 && sprite.y<this.causeButton[3].y-100){
+           sprite.y =this.causeButton[2].y;
+       }
+       else if (sprite.y>this.causeButton[3].y-100){
+           sprite.y = this.causeButton[3].y;
+       }
+       else if (sprite.y>this.causeButton[3].y){
+           sprite.y = this.causeButton[3].y;
+       }
     }
    if (sprite.x>this._clipboardButton.x){
    
