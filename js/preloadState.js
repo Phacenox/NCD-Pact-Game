@@ -23,6 +23,12 @@ preloadState.prototype.preload = function(){
     game.load.audio("drop","assets/drop.wav");
 
     
+	
+	game.load.spritesheet("male", "assets/male.png", 25, 55, 12);
+	game.load.spritesheet("female", "assets/female.png", 25, 55, 12);
+	
+	
+	
     };
 
 preloadState.prototype.create = function(){
