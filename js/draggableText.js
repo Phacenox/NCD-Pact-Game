@@ -1,4 +1,5 @@
 let draggableText = function(){
+    this.causeText=[];
 
 };
 
@@ -10,6 +11,8 @@ draggableText.prototype.preload = function(){
 draggableText.prototype.create = function(){
 
   this.draggabletext = game.add.group();
+   
+    
 
     this.draggabletext.enableBody = true;
 
@@ -19,13 +22,18 @@ draggableText.prototype.create = function(){
 };
 
 
-draggableText.prototype.add = function(x, y, name){
-    let text = this.draggabletext.create(x, y, name);
-  text.inputEnabled = true;
-  text.input.enableDrag();
 
- //  text.input.enableSnap(100,100,true,true);
-    return text;
+draggableText.prototype.add = function(x, y, name,causetextindex){
+    let causeText = this.draggabletext.create(x, y, name,causetextindex);
+    this.causetextindex = causetextindex;
+    this.causeText[causetextindex]= causeText;
+
+
+    this.causeText[causetextindex].inputEnabled= true;
+   //this.causeText[causetextindex].input.enableDrag();
+
+ 
+    return causeText;
     
 };
 

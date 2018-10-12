@@ -2,6 +2,7 @@ let gameplayState = function(){
 	this.score = 0;
     this.causeButton=[];
 	this.currentPerson = -1;
+    this.causeText=[];
 };
 
 gameplayState.prototype.preload = function(){
@@ -91,17 +92,41 @@ gameplayState.prototype.create = function(){
          this.clipboard.addBlankButton(-300, 200+200*(i-8), "diseasebutton", i);
     }
     
+    for (var i=0; i<4; i++){
+        this.causeText[i] = this.draggablestuff.add(1600, 200+200*i,"causetext2", i);
+       
+    }
+    this.causeText[0].input.enableDrag();
+    this.causeText[1].input.enableDrag();
+    this.causeText[2].input.enableDrag();
+    this.causeText[3].input.enableDrag();
+   // this.causeText1 = this.draggablestuff.add(1600,200,"causetext2");
+   // this.causeText2 = this.draggablestuff.add(1600,400,"causetext2");
+
+    this.causeText[0].events.onDragStop.add(onDragStop, this);
+    this.causeText[1].events.onDragStop.add(onDragStop, this);
+    this.causeText[2].events.onDragStop.add(onDragStop, this);
+    this.causeText[3].events.onDragStop.add(onDragStop, this);
+    this.causeText[0].events.onDragStart.add(onDragStart,this);
+    this.causeText[1].events.onDragStart.add(onDragStart,this);
+    this.causeText[2].events.onDragStart.add(onDragStart,this);
+    this.causeText[3].events.onDragStart.add(onDragStart,this);
+    this.causeText[0].events.onInputDown.add(onInputDown,this);
+    this.causeText[1].events.onInputDown.add(onInputDown,this);
+    this.causeText[2].events.onInputDown.add(onInputDown,this);
+    this.causeText[3].events.onInputDown.add(onInputDown,this);
     
-    this.causeText1 = this.draggablestuff.add(1600,200,"causetext2");
 
-   this.causeText2 = this.draggablestuff.add(1600,400,"causetext2");
+    
 
-    this.causeText1.events.onDragStop.add(onDragStop, this);
-    this.causeText2.events.onDragStop.add(onDragStop, this);
-    this.causeText1.events.onDragStart.add(onDragStart,this);
-    this.causeText2.events.onDragStart.add(onDragStart,this);
-    this.causeText1.events.onInputDown.add(onInputDown,this);
-    this.causeText2.events.onInputDown.add(onInputDown,this);
+    
+    
+    //this.causeText1.events.onDragStop.add(onDragStop, this);
+    //this.causeText2.events.onDragStop.add(onDragStop, this);
+    //this.causeText1.events.onDragStart.add(onDragStart,this);
+    //this.causeText2.events.onDragStart.add(onDragStart,this);
+   // this.causeText1.events.onInputDown.add(onInputDown,this);
+   // this.causeText2.events.onInputDown.add(onInputDown,this);
     this.toggle = true;
 };
 
@@ -170,7 +195,7 @@ function onDragStop(sprite, pointer){
 
 
 gameplayState.prototype.update = function(){
-	  this.draggablestuff.update();
+    this.draggablestuff.update();
 	this.clipboard.update();
 	this.personInfo.update();
     game.physics.arcade.overlap(this.causeText1, this.clipboard.causeButton[0], overlap);
@@ -186,6 +211,10 @@ gameplayState.prototype.update = function(){
 		this.townArea.removePerson(this.currentPerson);
 	}
 };
+	this.townArea.update();
+    //game.physics.arcade.overlap(this.causeText1, this.clipboard.causeButton[0], overlap);
+    //game.physics.arcade.overlap(this.causeText2, this.clipboard.causeButton[1], overlap);
+}
 
 function overlap ()
 {

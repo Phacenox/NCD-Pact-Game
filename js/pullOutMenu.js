@@ -8,6 +8,7 @@ let pullOutMenu = function(distance, inverted){
 	this.travelDistance = distance;
 	this.inverted = inverted;
     this.causeButton =[];
+    
    
 };
 
@@ -21,11 +22,11 @@ pullOutMenu.prototype.add = function(x, y, name){
 	return this.items.create(x, y, name);
 };
 
-pullOutMenu.prototype.addBlankButton = function(x,y,name,index)
+pullOutMenu.prototype.addBlankButton = function(x,y,name,blankbuttonindex)
 {
-    let causeButton = this.items.create(x,y,name,index);
-    this.index = index;
-    this.causeButton[index]= causeButton;
+    let causeButton = this.items.create(x,y,name,blankbuttonindex);
+    this.blankbuttonindex = blankbuttonindex;
+    this.causeButton[blankbuttonindex]= causeButton;
     this.causeButton.enableBody = true;
     return causeButton;
     
