@@ -4,36 +4,65 @@ let gameplayState = function(){
 };
 
 gameplayState.prototype.preload = function(){
-    //data is stored with integers in mind, 
+    //data is stored with integers in mind
+	this.numpeople = 0;
+	this.peopleNames = [];
+	this.peopleData = [];
+	this.peopleSprites = [];
+	
+	
+	//person one
+	this.numpeople++;
+	this.peopleNames.push("Holly Hammond");
+	this.peopleData.push("A");
+	this.peopleData.push("B");
+	this.peopleData.push("C");
+	this.peopleData.push("D");
+	this.peopleData.push("E");
+	this.peopleSprites.push(0);
+	this.peopleSprites.push(0);
+	this.peopleSprites.push(0);
+	
+	//person two
+	this.numpeople++;
+	this.peopleNames.push("Mr. Anderson");
+	this.peopleData.push("B");
+	this.peopleData.push("C");
+	this.peopleData.push("D");
+	this.peopleData.push("E");
+	this.peopleData.push("F");
+	this.peopleSprites.push(0);
+	this.peopleSprites.push(1);
+	this.peopleSprites.push(0);
 };
 
 gameplayState.prototype.create = function(){
-	let numpeople = 12;
 	this.townArea = new townArea();
-	this.townArea.create(numpeople);
+	this.townArea.create(this.numpeople);
 	this.townArea.addPlace(game.world.centerX, game.world.centerY);
 	
 	this.personInfo = new pullOutMenuRight(915, -1);
     this.personInfo.create();
 	this.personInfo.add(game.world.width - 63 - 20, 0, "clipboardright");
 	this._personInfoButton = this.personInfo.addButton(game.world.width - 63 -10, 465, "clipboardbutton");
-	
+	this.personInfo.initData();
 	let randompadding = 300;
-	for(var i = 0; i < numpeople; i++){
-		let randx = (game.rnd.integer() % (game.world.width - 2*randompadding)) + randompadding;
-		let randy = (game.rnd.integer() % (game.world.height - 2*randompadding)) + randompadding;
-		this.townArea.addPerson(i, randx, randy, "star", this._personInfoButton);
-	}
 	
     this.clipboard = new pullOutMenu(915, 1);
     this.clipboard.create();
+	
+	this.clipboard.add(-915, 0, "clipboard");
+	this._clipboardButton = this.clipboard.addButton(10, 465, "clipboardbutton");
 	   
+	for(var i = 0; i < this.numpeople; i++){
+		let randx = (game.rnd.integer() % (game.world.width - 2*randompadding)) + randompadding;
+		let randy = (game.rnd.integer() % (game.world.height - 2*randompadding)) + randompadding;
+		this.townArea.addPerson(i, randx, randy, this.peopleSprites[i*3+0], this.peopleSprites[i*3+1], this.peopleSprites[i*3+2], this._personInfoButton);
+	}
     
     this.draggablestuff = new draggableText();
     this.draggablestuff.create();
     
-	this.clipboard.add(-915, 0, "clipboard");
-	this._clipboardButton = this.clipboard.addButton(10, 465, "clipboardbutton");
 	
 	
     let _causeButton1 = this.clipboard.add(-800,200, "causebutton");
@@ -87,10 +116,11 @@ gameplayState.prototype.update = function(){
 	let personquery = this.townArea.update();
 	if(personquery != -1){
 		if(this.currentPerson != -1){
-			//TODO: add old person
+			this.townArea.addPerson(this.currentPerson, this._personInfoButton.x, this._personInfoButton.y, this.peopleSprites[this.currentPerson*3+0], this.peopleSprites[this.currentPerson*3+1], this.peopleSprites[this.currentPerson*3+2], this._personInfoButton);
 		}
 		this.currentPerson = personquery;
 		this.personInfo.openMenu();
+		this.personInfo.setData(this.peopleNames[personquery], this.peopleSprites[personquery*3+0], this.peopleSprites[personquery*3+1], this.peopleSprites[personquery*3+2], this.peopleData[personquery*5+0], this.peopleData[personquery*5+1], this.peopleData[personquery*5+2], this.peopleData[personquery*5+3], this.peopleData[personquery*5+4]);
 		this.townArea.removePerson(this.currentPerson);
 	}
 };

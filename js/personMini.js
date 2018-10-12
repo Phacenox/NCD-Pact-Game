@@ -33,16 +33,32 @@ personMini.prototype.destroy = function(){
 	this.allParts.destroy(true);
 }
 
-personMini.prototype.create = function(index, x, y, spritename, personInfoButton){
+personMini.prototype.create = function(index, x, y, gender, spritesheetX, spritesheetY, personInfoButton, objectLayer){
 	this.personInfoButton = personInfoButton;
 	this.index = index;
 	this.animationFrame = game.rnd.integer() % this.animationSpeed;
-	this.sprite = this.allParts.create(x, y, spritename);
+	if(gender === 1){
+		this.sprite = this.allParts.create(x, y, 'female');
+		this.sprite.frame = spritesheetY*12 + spritesheetX;
+	}else{
+		this.sprite = this.allParts.create(x, y, 'male');
+		this.sprite.frame = spritesheetY*12 + spritesheetX;
+	}
+	if(gender === 1){
+		this.spriteCopy = game.add.sprite(x, y, 'female');
+		this.spriteCopy.frame = spritesheetY*12 + spritesheetX;
+	}else{
+		this.spriteCopy = game.add.sprite(x, y, 'male');
+		this.spriteCopy.frame = spritesheetY*12 + spritesheetX;
+	}
+	game.physics.arcade.enable(this.spriteCopy);
+	this.spriteCopy.alpha = 0;
 	this.hitbox = this.allParts.create(x, y, "platform");
 	this.hitbox.alpha = 0;
 	this.hitbox.inputEnabled = true;
 	this.hitbox.events.onInputDown.add(this.actiononClick, this);
 	this.hitbox.events.onInputUp.add(this.actiononClickUp, this);
+	objectLayer.add(this.allParts);
 	return this.sprite;
 };
 
@@ -57,6 +73,7 @@ personMini.prototype.update = function(){
 	}
 	if(this.pickedUp === true){
 		this.allParts.forEachAlive(this.followMouse, this);
+		this.followMouse(this.spriteCopy)
 		this.lastMouseX = game.input.x;
 		this.lastMouseY = game.input.y;
 	}else{
@@ -104,11 +121,13 @@ personMini.prototype.update = function(){
 				let movex = this.movespeed*diffx/mag;
 				let movey = this.movespeed*diffy/mag;
 				this.allParts.forEachAlive(this.moveAmount, this, movex, movey);
+				this.moveAmount(this.spriteCopy, movex, movey);
 			}
 		}
 	}
 	
 		this.allParts.forEachAlive(this.animate, this);
+		this.animate(this.spriteCopy);
 		this.animationFrame++;
 	return -1;
 };
@@ -138,6 +157,7 @@ personMini.prototype.actiononClick = function(){
 	this.lastMouseX = game.input.x;
 	this.lastMouseY = game.input.y;
 	this.pickedUp = true;
+	this.spriteCopy.alpha = 1;
 };
 
 //todo: remove that sprite
@@ -150,4 +170,5 @@ personMini.prototype.actiononClickUp = function(){
 			this.dataquery = true;
 		}
 	}
+	this.spriteCopy.alpha = 0;
 };

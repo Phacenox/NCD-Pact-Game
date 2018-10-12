@@ -26,10 +26,10 @@ townArea.prototype.addPlace = function(x, y){
 }
 //after adding places, it is assumed to be read only.
 
-townArea.prototype.addPerson = function(index, x, y, spritename, personInfoButton){
+townArea.prototype.addPerson = function(index, x, y, gender, spritex, spritey, personInfoButton){
 	let _person = new personMini();
 	_person.initPathing(this.places, this.numplaces);
-	_person.create(index, x, y, spritename, personInfoButton);
+	_person.create(index, x, y, gender, spritex, spritey, personInfoButton, this.objects);
 	this.people[index] = _person;
 	return _person;
 }
