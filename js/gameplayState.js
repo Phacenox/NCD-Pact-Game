@@ -100,8 +100,7 @@ gameplayState.prototype.create = function(){
     this.causeText[1].input.enableDrag();
     this.causeText[2].input.enableDrag();
     this.causeText[3].input.enableDrag();
-   // this.causeText1 = this.draggablestuff.add(1600,200,"causetext2");
-   // this.causeText2 = this.draggablestuff.add(1600,400,"causetext2");
+
 
     this.causeText[0].events.onDragStop.add(onDragStop, this);
     this.causeText[1].events.onDragStop.add(onDragStop, this);
@@ -210,11 +209,11 @@ gameplayState.prototype.update = function(){
 		this.personInfo.setData(this.peopleNames[personquery], this.peopleSprites[personquery*3+0], this.peopleSprites[personquery*3+1], this.peopleSprites[personquery*3+2], this.peopleData[personquery*5+0], this.peopleData[personquery*5+1], this.peopleData[personquery*5+2], this.peopleData[personquery*5+3], this.peopleData[personquery*5+4]);
 		this.townArea.removePerson(this.currentPerson);
 	}
-};
+
 	this.townArea.update();
     //game.physics.arcade.overlap(this.causeText1, this.clipboard.causeButton[0], overlap);
     //game.physics.arcade.overlap(this.causeText2, this.clipboard.causeButton[1], overlap);
-}
+};
 
 function overlap ()
 {
