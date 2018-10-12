@@ -19,6 +19,10 @@ preloadState.prototype.preload = function(){
 	game.load.image("clipboardright", "assets/clipboardRight.png");
     game.load.image("clipboardbutton", "assets/clipboardButton.png");
 	game.load.image("town1", "assets/town1.png");
+    game.load.audio("drag","assets/drag.wav");
+    game.load.audio("drop","assets/drop.wav");
+
+    
     };
 
 preloadState.prototype.create = function(){

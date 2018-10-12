@@ -9,6 +9,8 @@ gameplayState.prototype.preload = function(){
 
 gameplayState.prototype.create = function(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.drag = game.add.audio("drag",1);
+    this.drop = game.add.audio("drop",1);
 	game.add.sprite(0, 0, "town1");
 	
 	let numpeople = 12;
@@ -57,6 +59,8 @@ gameplayState.prototype.create = function(){
 
     this.causeText1.events.onDragStop.add(onDragStop, this);
     this.causeText2.events.onDragStop.add(onDragStop, this);
+    this.causeText1.events.onDragStart.add(onDragStart,this);
+    this.causeText2.events.onDragStart.add(onDragStart,this);
     this.causeText1.events.onInputDown.add(onInputDown,this);
     this.causeText2.events.onInputDown.add(onInputDown,this);
     this.toggle = true;
@@ -71,8 +75,15 @@ function onInputDown(sprite, pointer)
     }
 }
 
+function onDragStart()
+{
+   this.drag.play("drag",1);
+}
+
+
 function onDragStop(sprite, pointer){
     sprite = this.clipboard.addChild(sprite);
+    this.drop.play("drop",1);
     if (sprite.x<this._clipboardButton.x)
    {
       
