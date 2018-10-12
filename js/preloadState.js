@@ -19,8 +19,8 @@ preloadState.prototype.preload = function(){
 	game.load.image("clipboardright", "assets/clipboardRight.png");
     game.load.image("clipboardbutton", "assets/clipboardButton.png");
 	
-	game.load.spritesheet("male", "assets/male.png", 24, 54, 12);
-	game.load.spritesheet("female", "assets/female.png", 24, 54, 12);
+	game.load.spritesheet("male", "assets/male.png", 25, 55, 12);
+	game.load.spritesheet("female", "assets/female.png", 25, 55, 12);
 	
 	
 	

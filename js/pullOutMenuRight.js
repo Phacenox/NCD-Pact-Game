@@ -11,21 +11,23 @@ let pullOutMenuRight = function(distance, inverted){
 };
 
 pullOutMenuRight.prototype.initData = function(){
-	this.picture = this.items.create(2500, 0);
-	this.nametext = game.add.text(3000, 100, "name", 16);
+	this.picture = this.items.create(3000, 100);
+	this.picture.scale.setTo(4, 4)
+	this.nametext = game.add.text(2500, 100, "----------------------------------------", 16);
 	this.items.add(this.nametext);
-	this.textA = game.add.text(2500, 100, "hi", 16);
-	this.textA.color = '0xFFAAAAAA';
+	this.textA = game.add.text(2500, 300, "--------------------------------------------------------------------------------", 16);
 	this.items.add(this.textA);
-	this.textB = game.add.text(2500, 200, "hi", 16);
+	this.textB = game.add.text(2500, 450, "--------------------------------------------------------------------------------", 16);
 	this.items.add(this.textB);
-	this.textC = game.add.text(2500, 300, "hi", 16);
+	this.textC = game.add.text(2500, 600, "--------------------------------------------------------------------------------", 16);
 	this.items.add(this.textC);
-	this.textD = game.add.text(2500, 400, "hi", 16);
+	this.textD = game.add.text(2500, 750, "--------------------------------------------------------------------------------", 16);
 	this.items.add(this.textD);
-	this.textE = game.add.text(2500, 500, "hi", 16);
+	this.textE = game.add.text(2500, 900, "--------------------------------------------------------------------------------", 16);
 	this.items.add(this.textE);
 }
+
+
 
 pullOutMenuRight.prototype.setData = function(name, gender, spritex, spritey, A, B, C, D, E){
 	if(gender === 1){
