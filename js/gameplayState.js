@@ -71,8 +71,6 @@ gameplayState.prototype.create = function(){
     this.draggablestuff.create();
     
 	
-	this.personInfo.add(game.world.width - 63 - 20, 0, "clipboardright");
-	this._personInfoButton = this.personInfo.addButton(game.world.width - 63 -10, 465, "clipboardbutton");
 	//generating cause blank button for the first column
     for(var i=0; i< 4; i++){
        this.causeButton[i]=this.clipboard.addBlankButton(-810, 200+200*i, "causebutton", i);
