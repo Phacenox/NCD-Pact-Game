@@ -11,6 +11,7 @@ preloadState.prototype.preload = function(){
 	
 	//our files
 	game.load.image("startbutton", "assets/StartButton.png");
+	game.load.image("hut", "assets/Hut.png");
     game.load.image("causetext","assets/causetext.png");
     game.load.image("causetext2","assets/causetext2.png");
     game.load.image("causebutton","assets/causebutton.png");

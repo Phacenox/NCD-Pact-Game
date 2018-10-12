@@ -46,7 +46,14 @@ gameplayState.prototype.create = function(){
 	let numpeople = 12;
 	this.townArea = new townArea();
 	this.townArea.create(this.numpeople);
-	this.townArea.addPlace(game.world.centerX, game.world.centerY);
+	this.townArea.addObject(1000, 500, 'hut');
+	this.townArea.addPlace(1095, 590);
+	this.townArea.addObject(1600, 250, 'hut');
+	this.townArea.addPlace(1695, 340);
+	this.townArea.addObject(1000, 500, 'hut');
+	this.townArea.addPlace(1095, 590);
+	this.townArea.addObject(1100, 150, 'hut');
+	this.townArea.addPlace(1195, 240);
 	
 	this.personInfo = new pullOutMenuRight(915, -1);
     this.personInfo.create();
