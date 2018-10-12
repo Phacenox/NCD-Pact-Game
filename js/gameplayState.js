@@ -168,7 +168,6 @@ gameplayState.prototype.update = function(){
 	  this.draggablestuff.update();
 	this.clipboard.update();
 	this.personInfo.update();
-	this.townArea.update();
     game.physics.arcade.overlap(this.causeText1, this.clipboard.causeButton[0], overlap);
     game.physics.arcade.overlap(this.causeText2, this.clipboard.causeButton[1], overlap);
 	let personquery = this.townArea.update();
