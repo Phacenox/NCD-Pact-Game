@@ -53,7 +53,7 @@ personMini.prototype.create = function(index, x, y, gender, spritesheetX, sprite
 	}
 	game.physics.arcade.enable(this.spriteCopy);
 	this.spriteCopy.alpha = 0;
-	this.hitbox = this.allParts.create(x, y, "platform");
+	this.hitbox = this.allParts.create(x-20, y-20, "minihitbox");
 	this.hitbox.alpha = 0;
 	this.hitbox.inputEnabled = true;
 	this.hitbox.events.onInputDown.add(this.actiononClick, this);

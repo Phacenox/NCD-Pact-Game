@@ -12,6 +12,7 @@ let pullOutMenuRight = function(distance, inverted){
 
 pullOutMenuRight.prototype.initData = function(){
 	this.picture = this.items.create(3120, 200);
+	this.picture.smoothed = false;
 	this.picture.scale.setTo(4, 4)
 	this.nametext = game.add.text(2500, 200, "", 16);
 	this.items.add(this.nametext);

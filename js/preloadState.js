@@ -21,9 +21,9 @@ preloadState.prototype.preload = function(){
 	game.load.image("town1", "assets/town1.png");
     game.load.audio("drag","assets/drag.wav");
     game.load.audio("drop","assets/drop.wav");
-
     
 	
+	game.load.image("minihitbox", "assets/minihitbox.png");
 	game.load.spritesheet("male", "assets/male.png", 25, 55, 12);
 	game.load.spritesheet("female", "assets/female.png", 25, 55, 12);
 	
