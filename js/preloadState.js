@@ -12,6 +12,7 @@ preloadState.prototype.preload = function(){
 	
 	//our files
 	game.load.image("startbutton", "assets/StartButton.png");
+	game.load.image("menuscreen", "assets/MenuScreen.png");
 	game.load.image("hut", "assets/Hut.png");
     game.load.image("causetext","assets/causetext.png");
     game.load.image("causetext2","assets/causetext2.png");
@@ -28,7 +29,31 @@ preloadState.prototype.preload = function(){
     game.load.audio("open","assets/open.wav");
     game.load.audio("correct","assets/correct.wav");
     game.load.audio("incorrect","assets/incorrect.wav");
-    
+	//Disease Icons
+	game.load.image("cheek", "assets/DiseaseIcons/cheek.png");
+	game.load.image("devil", "assets/DiseaseIcons/devil.png");
+	game.load.image("dwarf", "assets/DiseaseIcons/dwarf.png");
+	game.load.image("eyes", "assets/DiseaseIcons/eyes.png");
+	game.load.image("firehead", "assets/DiseaseIcons/firehead.png");
+	game.load.image("holetummy", "assets/DiseaseIcons/holetummy.png");
+	game.load.image("mindblow", "assets/DiseaseIcons/mindblow.png");
+	game.load.image("nose", "assets/DiseaseIcons/nose.png");
+	game.load.image("pentapox", "assets/DiseaseIcons/pentapox.png");
+	game.load.image("holetummy", "assets/DiseaseIcons/holetummy.png");
+    game.load.image("redskin", "assets/DiseaseIcons/redskin.png");
+	game.load.image("slime", "assets/DiseaseIcons/slime.png");
+	//Cause Icons
+	game.load.image("AntisocialCause", "assets/CauseIcons/AntisocialCause.png");
+	game.load.image("ConstructionCause", "assets/CauseIcons/ConstructionCause.png");
+	game.load.image("FarmCause", "assets/CauseIcons/FarmCause.png");
+	game.load.image("ForestCause", "assets/CauseIcons/ForestCause.png");
+	game.load.image("HusbandCause", "assets/CauseIcons/HusbandCause.png");
+	game.load.image("MeatCause", "assets/CauseIcons/MeatCause.png");
+	game.load.image("SummerCause", "assets/CauseIcons/SummerCause.png");
+	game.load.image("TeacherCause", "assets/CauseIcons/TeacherCause.png");
+	game.load.image("VegetarianCause", "assets/CauseIcons/VegetarianCause.png");
+	game.load.image("WealthyCause", "assets/CauseIcons/WealthyCause.png");
+	game.load.image("WifeCause", "assets/CauseIcons/WifeCause.png");
 	
 	game.load.image("minihitbox", "assets/minihitbox.png");
 	game.load.spritesheet("male", "assets/male.png", 25, 55, 12);
