@@ -10,9 +10,24 @@ let pullOutMenuRight = function(distance, inverted){
     this.open = game.add.audio("open",1);
     this.close = game.add.audio("close",1);
     
-
+	this.draggables = game.add.group();
+	this.draggables.enablebody = true;
 	
 };
+
+pullOutMenuRight.prototype.isOpen = function(){
+	return this.opened;
+}
+
+pullOutMenuRight.prototype.destroyDraggables = function(){
+	this.draggables.destroy(true);
+	this.draggables = game.add.group();
+	this.draggables.enablebody = true;
+}
+
+pullOutMenuRight.prototype.adddraggable = function(item){
+	this.draggables.add(item);
+}
 
 pullOutMenuRight.prototype.initData = function(){
 	this.picture = this.items.create(3120, 200);
@@ -58,6 +73,10 @@ pullOutMenuRight.prototype.add = function(x, y, name){
 	return this.items.create(x, y, name);
 }
 
+pullOutMenuRight.prototype.addGroup = function(thing){
+	return this.items.add(thing);
+}
+
 pullOutMenuRight.prototype.removeChild = function(sprite)
 {
     return this.items.removeChild(sprite);
@@ -76,6 +95,7 @@ pullOutMenuRight.prototype.update = function(){
 	if(this.animating !== 0){
 		if(this.animationframe < this.animationFrames){
 			this.items.forEachAlive(this.moveAmount, this, this.inverted*this.travelDistance*this.animating*this.smoothEquation((this.animationframe/this.animationFrames)));
+			this.draggables.forEachAlive(this.moveAmount, this, this.inverted*this.travelDistance*this.animating*this.smoothEquation((this.animationframe/this.animationFrames)));
 			this.animationframe++;
 		}else{
 			this.animationframe = 0;

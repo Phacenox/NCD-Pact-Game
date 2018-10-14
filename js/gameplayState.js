@@ -1,9 +1,17 @@
 let gameplayState = function(){
 	this.score = 0;
     this.causeButton=[];
+	
+	this.causeButtonFinals = [];
+	for(var i = 0; i < 8; i++){
+		this.causeButtonFinals[i] = null;
+	}
+	
 	this.currentPerson = -1;
     this.causeText=[];
     this.diseaseButton = [];
+	
+	this.causeButtonDraggables = [];
 };
 
 gameplayState.prototype.preload = function(){
@@ -41,8 +49,6 @@ gameplayState.prototype.preload = function(){
 
 gameplayState.prototype.create = function(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    this.drag = game.add.audio("drag",1);
-    this.drop = game.add.audio("drop",1);
     this.correct = game.add.audio("correct",1);
     this.incorrect = game.add.audio("incorrect",1);
 	game.add.sprite(0, 0, "town1");
@@ -79,27 +85,21 @@ gameplayState.prototype.create = function(){
 		this.townArea.addPerson(i, randx, randy, this.peopleSprites[i*3+0], this.peopleSprites[i*3+1], this.peopleSprites[i*3+2], this._personInfoButton);
 	}
     
-    this.draggablestuff = new draggableText();
-    this.draggablestuff.create();
+    this.draggablestuff = [];
     
 	
 	//generating cause blank button for the first column
-    for(var i=0; i< 4; i++){
+    for(var i=0; i< 8; i++){
        this.causeButton[i]=this.clipboard.addBlankButton(-800 + 200*Math.floor(i/4), 200+200*(i%4), "causebutton", i);
-     }
+		
+	 }
     //generating disease button
     for(var i=0; i< 4; i++){
          this.diseaseButton[i] = this.clipboard.addBlankButton(-300, 200+200*i, "diseasebutton", i);
     }
-    //generating cause text that is draggable
-    for (var i=0; i<8; i++){
-        this.causeText[i] = this.draggablestuff.add(1800 + 200*Math.floor(i/4), 200+200*(i%4),"causetext2", i);
-        this.causeText[i].input.enableDrag();
-        game.physics.arcade.enable(this.causeText[i]);
-        this.causeText[i].events.onDragStop.add(onDragStop, this);
-        this.causeText[i].events.onDragStart.add(onDragStart,this);
-        this.causeText[i].events.onInputDown.add(onInputDown,this);
-    }
+	
+	
+	
 
 
     this.toggle = true;
@@ -109,78 +109,29 @@ gameplayState.prototype.create = function(){
     this.toggle5 = true;
 };
 
-function onInputDown(sprite, pointer)
-{
-  
-    if (this.toggle===true){
-        this.causetextbutton = this.draggablestuff.add(sprite.x, sprite.y, "causetext");
-       this.toggle = false;
-    }
-}
-
-function onDragStart()
-{
-   this.drag.play("",0,1);
-}
-
-
-function onDragStop(sprite, pointer){
-    sprite = this.clipboard.addChild(sprite);
-    this.drop.play("",0,1);
-    if (sprite.x<this._clipboardButton.x)
-   {
-      
-  if (sprite.x>this.causeButton[4].x-100){
-    
-    //  console.log(sprite.x);
-     
-        sprite.x =this.causeButton[4].x;
-       }
-       else if (sprite.x< this.causeButton[4].x-100){
-
-         //  console.log(sprite.x);
-
-           sprite.x = this.causeButton[0].x;
-      }
-   
-        if(sprite.y<this.causeButton[1].y-100){
-       
-           sprite.y =this.causeButton[0].y;
-       }
-       else if(sprite.y>this.causeButton[1].y-100 && sprite.y<this.causeButton[2].y-100){
-           
-           sprite.y =this.causeButton[1].y;
-       }
-
-       else if (sprite.y>this.causeButton[2].y-100 && sprite.y<this.causeButton[3].y-100){
-           sprite.y =this.causeButton[2].y;
-       }
-       else if (sprite.y>this.causeButton[3].y-100){
-           sprite.y = this.causeButton[3].y;
-       }
-       else if (sprite.y>this.causeButton[3].y){
-           sprite.y = this.causeButton[3].y;
-       }
-    }
-   if (sprite.x>this._clipboardButton.x){
-   
-       sprite  = this.draggablestuff.addChild(sprite);
-
-       
-    }
-    
-}
-
-
-
 gameplayState.prototype.update = function(){
-    this.draggablestuff.update();
 	this.clipboard.update();
 	this.personInfo.update();
     game.physics.arcade.overlap(this.causeText1, this.clipboard.causeButton[0], overlap);
     game.physics.arcade.overlap(this.causeText2, this.clipboard.causeButton[1], overlap);
 	let personquery = this.townArea.update();
 	if(personquery != -1){
+		
+		this.personInfo.destroyDraggables();
+		
+		//generating cause text that is draggable
+		for (var i=0; i<5; i++){
+			if(!this.personInfo.isOpen()){
+				this.causeText[i] = new draggableText(1579 + 915, 488+122*i + 5*Math.floor(i/2)+ 1*Math.floor(i/4),"causetext2", this.causeButton, this.clipboard, this._clipboardButton, this.personInfo, this.causeButtonFinals);
+			}else
+				this.causeText[i] = new draggableText(1579, 488+122*i+ 5*Math.floor(i/2)+ 1*Math.floor(i/4),"causetext2", this.causeButton, this.clipboard, this._clipboardButton, this.personInfo, this.causeButtonFinals);
+			this.causeText[i].setDValue(i);
+			let cText = this.causeText[i].getSprite();
+			this.causeText[i].setOrigin(1579, 488+122*i+ 5*Math.floor(i/2)+ 1*Math.floor(i/4));
+			this.personInfo.adddraggable(cText);
+			
+		}
+		
 		if(this.currentPerson != -1){
 			let tmp = this.townArea.addPerson(this.currentPerson, this._personInfoButton.x + 20, this._personInfoButton.y + 50, this.peopleSprites[this.currentPerson*3+0], this.peopleSprites[this.currentPerson*3+1], this.peopleSprites[this.currentPerson*3+2], this._personInfoButton);
 			tmp.alphaAnimate()
@@ -191,14 +142,15 @@ gameplayState.prototype.update = function(){
 		this.townArea.removePerson(this.currentPerson);
 	}
 
-    this.zerozero = game.physics.arcade.overlap(this.causeText[0], this.causeButton[0], overlap);
-    this.fourfour =game.physics.arcade.overlap(this.causeText[4], this.causeButton[4], overlap);
-    this.oneone = game.physics.arcade.overlap(this.causeText[1], this.causeButton[1], overlap);
-    this.fivefive =game.physics.arcade.overlap(this.causeText[5], this.causeButton[5], overlap);
-    this.twotwo = game.physics.arcade.overlap(this.causeText[2], this.causeButton[2], overlap);
-    this.sixsix =game.physics.arcade.overlap(this.causeText[6], this.causeButton[6], overlap);
-    this.threethree = game.physics.arcade.overlap(this.causeText[3], this.causeButton[3], overlap);
-    this.sevenseven =game.physics.arcade.overlap(this.causeText[7], this.causeButton[7], overlap);
+	/*
+    this.zerozero = game.physics.arcade.overlap(this.causeText[0].getSprite(), this.causeButton[0], overlap);
+    this.fourfour =game.physics.arcade.overlap(this.causeText[4].getSprite(), this.causeButton[4], overlap);
+    this.oneone = game.physics.arcade.overlap(this.causeText[1].getSprite(), this.causeButton[1], overlap);
+    this.fivefive =game.physics.arcade.overlap(this.causeText[5].getSprite(), this.causeButton[5], overlap);
+    this.twotwo = game.physics.arcade.overlap(this.causeText[2].getSprite(), this.causeButton[2], overlap);
+    this.sixsix =game.physics.arcade.overlap(this.causeText[6].getSprite(), this.causeButton[6], overlap);
+    this.threethree = game.physics.arcade.overlap(this.causeText[3].getSprite(), this.causeButton[3], overlap);
+    this.sevenseven =game.physics.arcade.overlap(this.causeText[7].getSprite(), this.causeButton[7], overlap);
     
 
 
@@ -212,8 +164,8 @@ gameplayState.prototype.update = function(){
       this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,165, "correctblock");
           this.correct.play("",0,1);
           this.correctblock.inputEnabled = false;
-          this.causeText[0].body.immovable = true;
-         this.causeText[4].body.immovable = true;
+          this.causeText[0].getSprite().body.immovable = true;
+         this.causeText[4].getSprite().body.immovable = true;
       }
   
   }
@@ -226,8 +178,8 @@ gameplayState.prototype.update = function(){
             this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,365, "correctblock");
             this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
-            this.causeText[0].body.immovable = true;
-            this.causeText[4].body.immovable = true;
+            this.causeText[0].getSprite().body.immovable = true;
+            this.causeText[4].getSprite().body.immovable = true;
         }
         
     }
@@ -240,8 +192,8 @@ gameplayState.prototype.update = function(){
             this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,565, "correctblock");
             this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
-            this.causeText[0].body.immovable = true;
-            this.causeText[4].body.immovable = true;
+            this.causeText[0].getSprite().body.immovable = true;
+            this.causeText[4].getSprite().body.immovable = true;
         }
         
     }
@@ -254,13 +206,13 @@ gameplayState.prototype.update = function(){
             this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,765, "correctblock");
             this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
-            this.causeText[0].body.immovable = true;
-            this.causeText[4].body.immovable = true;
+            this.causeText[0].getSprite().body.immovable = true;
+            this.causeText[4].getSprite().body.immovable = true;
         }
         
     }
 
-      
+      */
     
 
 };
