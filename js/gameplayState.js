@@ -84,7 +84,7 @@ gameplayState.prototype.create = function(){
     
 	
 	//generating cause blank button for the first column
-    for(var i=0; i< 4; i++){
+    for(var i=0; i< 8; i++){
        this.causeButton[i]=this.clipboard.addBlankButton(-800 + 200*Math.floor(i/4), 200+200*(i%4), "causebutton", i);
      }
     //generating disease button
