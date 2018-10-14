@@ -56,8 +56,8 @@ preloadState.prototype.preload = function(){
 	game.load.image("WifeCause", "assets/CauseIcons/WifeCause.png");
 	
 	game.load.image("minihitbox", "assets/minihitbox.png");
-	game.load.spritesheet("male", "assets/male.png", 25, 55, 12);
-	game.load.spritesheet("female", "assets/female.png", 25, 55, 12);
+	game.load.spritesheet("male", "assets/male.png", 25, 55);
+	game.load.spritesheet("female", "assets/female.png", 25, 55);
 	
 	
 	
