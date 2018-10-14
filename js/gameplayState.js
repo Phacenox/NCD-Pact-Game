@@ -161,7 +161,7 @@ gameplayState.prototype.update = function(){
  
       if (this.toggle2===true)
       {this.toggle2 = false;
-      this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,165, "correctblock");
+      this.correctblock = this.clipboard.add(this.diseaseButton[0].x-600,165, "correctblock");
           this.correct.play("",0,1);
           this.correctblock.inputEnabled = false;
           this.causeText[0].getSprite().body.immovable = true;
@@ -175,7 +175,7 @@ gameplayState.prototype.update = function(){
         
         if (this.toggle3===true)
         {this.toggle3 = false;
-            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,365, "correctblock");
+            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-600,365, "correctblock");
             this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
             this.causeText[0].getSprite().body.immovable = true;
@@ -189,7 +189,7 @@ gameplayState.prototype.update = function(){
         
         if (this.toggle4===true)
         {this.toggle4 = false;
-            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,565, "correctblock");
+            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-600,565, "correctblock");
             this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
             this.causeText[0].getSprite().body.immovable = true;
@@ -203,7 +203,7 @@ gameplayState.prototype.update = function(){
         
         if (this.toggle5===true)
         {this.toggle5 = false;
-            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,765, "correctblock");
+            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-600,765, "correctblock");
             this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
             this.causeText[0].getSprite().body.immovable = true;

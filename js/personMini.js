@@ -28,6 +28,10 @@ let personMini = function(){
 	this.busy = 0;
 	this.dataquery = false;
 	this.decreasingAlpha = false;
+	
+	//sounds
+	this.drag = game.add.audio("drag",1);
+    this.drop = game.add.audio("drop",1);
 };
 
 personMini.prototype.destroy = function(){
@@ -172,6 +176,7 @@ personMini.prototype.actiononClick = function(){
 	this.pickedUp = true;
 	this.spriteCopy.alpha = 1;
 	this.decreasingAlpha = false;
+	this.drag.play("",0,1);
 };
 
 //todo: remove that sprite
@@ -185,4 +190,5 @@ personMini.prototype.actiononClickUp = function(){
 		}
 	}
 	this.decreasingAlpha = true;
+	this.drop.play("",0,1);
 };
