@@ -30,9 +30,8 @@ draggableText.prototype.add = function(x, y, name,causetextindex){
 
 
     this.causeText[causetextindex].inputEnabled= true;
-   //this.causeText[causetextindex].input.enableDrag();
-
- 
+    
+    
     return causeText;
     
 };
@@ -42,6 +41,12 @@ draggableText.prototype.addChild = function(sprite)
     return this.draggabletext.add(sprite);
     
 };
+draggableText.prototype.removeChild = function(sprite)
+{
+    return this.draggabletext.remove(sprite);
+    
+};
+
 
 
 draggableText.prototype.update = function(){
