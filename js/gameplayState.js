@@ -85,27 +85,15 @@ gameplayState.prototype.create = function(){
 	
 	//generating cause blank button for the first column
     for(var i=0; i< 4; i++){
-       this.causeButton[i]=this.clipboard.addBlankButton(-800, 200+200*i, "causebutton", i);
+       this.causeButton[i]=this.clipboard.addBlankButton(-800 + 200*Math.floor(i/4), 200+200*(i%4), "causebutton", i);
      }
-    //generating cause blank button for the second column
-    for(var i=4; i< 8; i++){
-        this.causeButton[i]=this.clipboard.addBlankButton(-600, 200+200*(i-4), "causebutton", i);
-    }
     //generating disease button
     for(var i=0; i< 4; i++){
          this.diseaseButton[i] = this.clipboard.addBlankButton(-300, 200+200*i, "diseasebutton", i);
     }
     //generating cause text that is draggable
-    for (var i=0; i<4; i++){
-        this.causeText[i] = this.draggablestuff.add(1800, 200+200*i,"causetext2", i);
-        this.causeText[i].input.enableDrag();
-        game.physics.arcade.enable(this.causeText[i]);
-        this.causeText[i].events.onDragStop.add(onDragStop, this);
-        this.causeText[i].events.onDragStart.add(onDragStart,this);
-        this.causeText[i].events.onInputDown.add(onInputDown,this);
-    }
-    for (var i=4; i<8; i++){
-        this.causeText[i] = this.draggablestuff.add(2000, 200+200*(i-4),"causetext2", i);
+    for (var i=0; i<8; i++){
+        this.causeText[i] = this.draggablestuff.add(1800 + 200*Math.floor(i/4), 200+200*(i%4),"causetext2", i);
         this.causeText[i].input.enableDrag();
         game.physics.arcade.enable(this.causeText[i]);
         this.causeText[i].events.onDragStop.add(onDragStop, this);
