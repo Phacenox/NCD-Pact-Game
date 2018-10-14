@@ -43,8 +43,6 @@ gameplayState.prototype.create = function(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
     this.drag = game.add.audio("drag",1);
     this.drop = game.add.audio("drop",1);
-    this.open = game.add.audio("open",1);
-    this.close = game.add.audio("close",1);
     this.correct = game.add.audio("correct",1);
     this.incorrect = game.add.audio("incorrect",1);
 	game.add.sprite(0, 0, "town1");
@@ -67,11 +65,13 @@ gameplayState.prototype.create = function(){
 	this._personInfoButton = this.personInfo.addButton(game.world.width - 63 -10, 465, "clipboardbutton");
 	this.personInfo.initData();
 	let randompadding = 300;
+  
 	
     this.clipboard = new pullOutMenu(915, 1);
     this.clipboard.create();
 	this.clipboard.add(-915, 0, "clipboard");
 	this._clipboardButton = this.clipboard.addButton(10, 465, "clipboardbutton");
+   
 	   
 	for(var i = 0; i < this.numpeople; i++){
 		let randx = (game.rnd.integer() % (game.world.width - 2*randompadding)) + randompadding;
@@ -284,5 +284,4 @@ function overlap ()
     //console.log("overlap");
     
 }
-
 

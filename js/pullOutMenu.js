@@ -8,6 +8,8 @@ let pullOutMenu = function(distance, inverted){
 	this.travelDistance = distance;
 	this.inverted = inverted;
     this.causeButton =[];
+    this.open = game.add.audio("open",1);
+    this.close = game.add.audio("close",1);
     
    
 };
@@ -78,10 +80,13 @@ pullOutMenu.prototype.actiononClick = function(){
 	if(this.animating === 0){
 		if(this.opened){
 			this.animating = -1;
+            this.close.play("",0,1);
 			this.opened = false;
 		}else{
 			this.animating = 1;
+            this.open.play("",0,1);
 			this.opened = true;
+           
 		}
 	}
 };
