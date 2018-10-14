@@ -8,6 +8,7 @@ preloadState.prototype.preload = function(){
 	game.load.image("platform", "assets/platform.png");
 	game.load.image("star", "assets/star.png");
 	game.load.spritesheet("murph", "assets/character.png", 32, 48);
+    
 	
 	//our files
 	game.load.image("startbutton", "assets/StartButton.png");
@@ -23,7 +24,10 @@ preloadState.prototype.preload = function(){
 	game.load.image("town1", "assets/town1.png");
     game.load.audio("drag","assets/drag.wav");
     game.load.audio("drop","assets/drop.wav");
-    
+    game.load.audio("close","assets/close.wav");
+    game.load.audio("open","assets/open.wav");
+    game.load.audio("correct","assets/correct.wav");
+    game.load.audio("incorrect","assets/incorrect.wav");
     
 	
 	game.load.image("minihitbox", "assets/minihitbox.png");

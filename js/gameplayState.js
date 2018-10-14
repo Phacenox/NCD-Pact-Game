@@ -43,6 +43,10 @@ gameplayState.prototype.create = function(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
     this.drag = game.add.audio("drag",1);
     this.drop = game.add.audio("drop",1);
+    this.open = game.add.audio("open",1);
+    this.close = game.add.audio("close",1);
+    this.correct = game.add.audio("correct",1);
+    this.incorrect = game.add.audio("incorrect",1);
 	game.add.sprite(0, 0, "town1");
 	
 	let numpeople = 12;
@@ -128,13 +132,13 @@ function onInputDown(sprite, pointer)
 
 function onDragStart()
 {
-   this.drag.play("drag",1);
+   this.drag.play("",0,1);
 }
 
 
 function onDragStop(sprite, pointer){
     sprite = this.clipboard.addChild(sprite);
-    this.drop.play("drop",1);
+    this.drop.play("",0,1);
     if (sprite.x<this._clipboardButton.x)
    {
       
@@ -218,6 +222,7 @@ gameplayState.prototype.update = function(){
       if (this.toggle2===true)
       {this.toggle2 = false;
       this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,165, "correctblock");
+          this.correct.play("",0,1);
           this.correctblock.inputEnabled = false;
           this.causeText[0].body.immovable = true;
          this.causeText[4].body.immovable = true;
@@ -231,6 +236,7 @@ gameplayState.prototype.update = function(){
         if (this.toggle3===true)
         {this.toggle3 = false;
             this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,365, "correctblock");
+            this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
             this.causeText[0].body.immovable = true;
             this.causeText[4].body.immovable = true;
@@ -244,6 +250,7 @@ gameplayState.prototype.update = function(){
         if (this.toggle4===true)
         {this.toggle4 = false;
             this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,565, "correctblock");
+            this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
             this.causeText[0].body.immovable = true;
             this.causeText[4].body.immovable = true;
@@ -257,6 +264,7 @@ gameplayState.prototype.update = function(){
         if (this.toggle5===true)
         {this.toggle5 = false;
             this.correctblock = this.clipboard.add(this.diseaseButton[0].x-650,765, "correctblock");
+            this.correct.play("",0,1);
             this.correctblock.inputEnabled = false;
             this.causeText[0].body.immovable = true;
             this.causeText[4].body.immovable = true;
