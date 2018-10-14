@@ -27,10 +27,12 @@ let personMini = function(){
 	
 	this.busy = 0;
 	this.dataquery = false;
+	this.decreasingAlpha = false;
 };
 
 personMini.prototype.destroy = function(){
 	this.allParts.destroy(true);
+	this.spriteCopy.destroy(true);
 }
 
 personMini.prototype.create = function(index, x, y, gender, spritesheetX, spritesheetY, personInfoButton, objectLayer){
@@ -68,6 +70,12 @@ personMini.prototype.initPathing = function(places, numplaces){
 }
 
 personMini.prototype.update = function(){
+	if(this.decreasingAlpha){
+		if(this.spriteCopy.alpha > 0)
+			this.spriteCopy.alpha -= .025;
+		else
+			this.decreasingAlpha = false;
+	}
 	if(this.dataquery){
 		return this.index;
 	}
@@ -142,6 +150,11 @@ personMini.prototype.moveAmount = function(item, x, y){
 	item.body.y += y;
 };
 
+personMini.prototype.alphaAnimate = function(){
+	this.spriteCopy.alpha = 1;
+	this.decreasingAlpha = true;
+}
+
 personMini.prototype.animate = function(item){
 	let lastx = (this.animationFrame-1)/this.animationSpeed;
 	let nowx = this.animationFrame/this.animationSpeed
@@ -158,6 +171,7 @@ personMini.prototype.actiononClick = function(){
 	this.lastMouseY = game.input.y;
 	this.pickedUp = true;
 	this.spriteCopy.alpha = 1;
+	this.decreasingAlpha = false;
 };
 
 //todo: remove that sprite
@@ -170,5 +184,5 @@ personMini.prototype.actiononClickUp = function(){
 			this.dataquery = true;
 		}
 	}
-	this.spriteCopy.alpha = 0;
+	this.decreasingAlpha = true;
 };

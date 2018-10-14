@@ -190,15 +190,14 @@ gameplayState.prototype.update = function(){
 	let personquery = this.townArea.update();
 	if(personquery != -1){
 		if(this.currentPerson != -1){
-			this.townArea.addPerson(this.currentPerson, this._personInfoButton.x, this._personInfoButton.y, this.peopleSprites[this.currentPerson*3+0], this.peopleSprites[this.currentPerson*3+1], this.peopleSprites[this.currentPerson*3+2], this._personInfoButton);
+			let tmp = this.townArea.addPerson(this.currentPerson, this._personInfoButton.x + 20, this._personInfoButton.y + 50, this.peopleSprites[this.currentPerson*3+0], this.peopleSprites[this.currentPerson*3+1], this.peopleSprites[this.currentPerson*3+2], this._personInfoButton);
+			tmp.alphaAnimate()
 		}
 		this.currentPerson = personquery;
 		this.personInfo.openMenu();
 		this.personInfo.setData(this.peopleNames[personquery], this.peopleSprites[personquery*3+0], this.peopleSprites[personquery*3+1], this.peopleSprites[personquery*3+2], this.peopleData[personquery*5+0], this.peopleData[personquery*5+1], this.peopleData[personquery*5+2], this.peopleData[personquery*5+3], this.peopleData[personquery*5+4]);
 		this.townArea.removePerson(this.currentPerson);
 	}
-
-	this.townArea.update();
 
     this.zerozero = game.physics.arcade.overlap(this.causeText[0], this.causeButton[0], overlap);
     this.fourfour =game.physics.arcade.overlap(this.causeText[4], this.causeButton[4], overlap);
