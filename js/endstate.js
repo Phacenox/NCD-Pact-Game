@@ -1,14 +1,15 @@
-let introState = function(){
+let endstate = function(){
 	
 };
 
-introState.prototype.preload = function(){
+endstate.prototype.preload = function(){
 	
 };
 
-introState.prototype.create = function(){
+endstate.prototype.create = function(){
+	game.add.sprite(0, -100, "outrotext");
 	
-	_startButton = game.add.sprite(game.world.centerX, 600, "startbutton");
+	_startButton = game.add.sprite(game.world.centerX, 900, "continueButton");
     _startButton.anchor.setTo(0.5);
 	_startButton.inputEnabled = true;
 	_startButton.events.onInputDown.add(this.actiononClick, this);
@@ -16,10 +17,10 @@ introState.prototype.create = function(){
 	
 };
 
-introState.prototype.update = function(){
+endstate.prototype.update = function(){
 	
 };
 
-introState.prototype.actiononClick = function(){
+endstate.prototype.actiononClick = function(){
 	game.state.start("Start");
 };

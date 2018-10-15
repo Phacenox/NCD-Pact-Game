@@ -1,14 +1,15 @@
-let introState = function(){
+let p12state = function(){
 	
 };
 
-introState.prototype.preload = function(){
+p12state.prototype.preload = function(){
 	
 };
 
-introState.prototype.create = function(){
+p12state.prototype.create = function(){
+	game.add.sprite(0, -100, "12text");
 	
-	_startButton = game.add.sprite(game.world.centerX, 600, "startbutton");
+	_startButton = game.add.sprite(game.world.centerX, 900, "startbutton");
     _startButton.anchor.setTo(0.5);
 	_startButton.inputEnabled = true;
 	_startButton.events.onInputDown.add(this.actiononClick, this);
@@ -16,10 +17,10 @@ introState.prototype.create = function(){
 	
 };
 
-introState.prototype.update = function(){
+p12state.prototype.update = function(){
 	
 };
 
-introState.prototype.actiononClick = function(){
+p12state.prototype.actiononClick = function(){
 	game.state.start("level2");
 };

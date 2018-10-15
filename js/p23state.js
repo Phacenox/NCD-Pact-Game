@@ -1,14 +1,15 @@
-let introState = function(){
+let p23state = function(){
 	
 };
 
-introState.prototype.preload = function(){
+p23state.prototype.preload = function(){
 	
 };
 
-introState.prototype.create = function(){
+p23state.prototype.create = function(){
+	game.add.sprite(0, -100, "23text");
 	
-	_startButton = game.add.sprite(game.world.centerX, 600, "startbutton");
+	_startButton = game.add.sprite(game.world.centerX, 900, "startbutton");
     _startButton.anchor.setTo(0.5);
 	_startButton.inputEnabled = true;
 	_startButton.events.onInputDown.add(this.actiononClick, this);
@@ -16,10 +17,10 @@ introState.prototype.create = function(){
 	
 };
 
-introState.prototype.update = function(){
+p23state.prototype.update = function(){
 	
 };
 
-introState.prototype.actiononClick = function(){
+p23state.prototype.actiononClick = function(){
 	game.state.start("level3");
 };

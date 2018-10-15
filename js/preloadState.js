@@ -59,10 +59,16 @@ preloadState.prototype.preload = function(){
 	game.load.image("WifeCause", "assets/CauseIcons/WifeCause.png");
 	
 	game.load.image("nextButton", "assets/NextLevelButton.png");
+	game.load.image("continueButton", "assets/ContinueButton.png");
 	
     game.load.image("plus","assets/PlusSign.png");
     game.load.image("minus","assets/MinusSign.png");
     game.load.image("equal","assets/EqualSign.png");
+	
+	game.load.image("introtext","assets/IntroductionScreen.png");
+    game.load.image("12text","assets/InBetweenScreen1.png");
+    game.load.image("23text","assets/InBetweenScreen2.png");
+	game.load.image("outrotext","assets/EndScreen.png");
 
     
     
