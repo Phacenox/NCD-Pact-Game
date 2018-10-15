@@ -134,6 +134,24 @@ gameplayState.prototype.preload = function(){
 	
 	this.commutative = [true, true, true, true];//true if addition, false if subtraction
 	
+	//person zero
+	this.tempRand = this.game.rnd.integerInRange(0, 1);
+	this.numpeople++;
+	if(this.tempRand === 1){
+		this.peopleNames.push(this.femaleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
+	}else{
+		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
+	}
+	this.peopleData.push(this.causeList[0]);
+	this.peopleData.push(this.causeList[2]);
+	this.peopleData.push(-1);
+	this.peopleData.push(-1);
+	this.peopleData.push(-1);
+	this.peopleSprites.push(this.tempRand);
+	this.peopleSprites.push(0);
+	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
+	
+	
 	//person one
 	this.tempRand = this.game.rnd.integerInRange(0, 1);
 	this.numpeople++;
