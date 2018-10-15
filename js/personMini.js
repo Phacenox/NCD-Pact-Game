@@ -30,8 +30,8 @@ let personMini = function(){
 	this.decreasingAlpha = false;
 	
 	//sounds
-	this.drag = game.add.audio("drag",1);
-    this.drop = game.add.audio("drop",1);
+	this.woman = game.add.audio("woman",1);
+    this.man = game.add.audio("man",1);
 };
 
 personMini.prototype.destroy = function(){
@@ -62,7 +62,12 @@ personMini.prototype.create = function(index, x, y, gender, spritesheetX, sprite
 	this.hitbox = this.allParts.create(x-20, y-20, "minihitbox");
 	this.hitbox.alpha = 0;
 	this.hitbox.inputEnabled = true;
-	this.hitbox.events.onInputDown.add(this.actiononClick, this);
+    if (gender ===1){
+    this.hitbox.events.onInputDown.add(this.actiononClickWoman, this);
+    }
+    else{
+        this.hitbox.events.onInputDown.add(this.actiononClickMan,this);
+    }
 	this.hitbox.events.onInputUp.add(this.actiononClickUp, this);
 	objectLayer.add(this.allParts);
 	return this.sprite;
@@ -170,13 +175,25 @@ personMini.prototype.animate = function(item){
 }
 
 //todo: create a copy of the sprite object that appears over everything else
-personMini.prototype.actiononClick = function(){
+personMini.prototype.actiononClickWoman= function(){
 	this.lastMouseX = game.input.x;
 	this.lastMouseY = game.input.y;
 	this.pickedUp = true;
 	this.spriteCopy.alpha = 1;
 	this.decreasingAlpha = false;
-	this.drag.play("",0,1);
+	this.woman.play("",0,1);
+       
+  
+};
+personMini.prototype.actiononClickMan= function(){
+    this.lastMouseX = game.input.x;
+    this.lastMouseY = game.input.y;
+    this.pickedUp = true;
+    this.spriteCopy.alpha = 1;
+    this.decreasingAlpha = false;
+    this.man.play("",0,1);
+  
+    
 };
 
 //todo: remove that sprite
@@ -190,5 +207,5 @@ personMini.prototype.actiononClickUp = function(){
 		}
 	}
 	this.decreasingAlpha = true;
-	this.drop.play("",0,1);
+	//this.drop.play("",0,1);
 };

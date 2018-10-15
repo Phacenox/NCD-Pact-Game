@@ -29,6 +29,9 @@ preloadState.prototype.preload = function(){
     game.load.audio("open","assets/open.wav");
     game.load.audio("correct","assets/correct.wav");
     game.load.audio("incorrect","assets/incorrect.wav");
+    game.load.audio("woman","assets/woman.wav");
+    game.load.audio("man","assets/man.wav");
+    game.load.audio("background","assets/Clipboard_Clinic_Music.wav");
 	//Disease Icons
 	game.load.image("cheek", "assets/DiseaseIcons/cheek.png");
 	game.load.image("devil", "assets/DiseaseIcons/devil.png");
