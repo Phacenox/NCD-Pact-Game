@@ -208,8 +208,6 @@ levelTwo.prototype.preload = function(){
 
 levelTwo.prototype.create = function(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    this.background = game.add.audio("background",1);
-    this.background.play("",0,1,true);
     this.correct = game.add.audio("correct",1);
     this.incorrect = game.add.audio("incorrect",1);
 	game.add.sprite(0, 0, "town1");

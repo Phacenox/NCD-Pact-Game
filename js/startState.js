@@ -16,6 +16,8 @@ startState.prototype.create = function(){
 	
 	
 
+    this.background = game.add.audio("background",1);
+    this.background.play("",0,1,true);
 	
 };
 
