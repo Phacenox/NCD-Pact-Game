@@ -221,8 +221,8 @@ gameplayState.prototype.create = function(){
     
 	
 	//generating cause blank button for the first column
-    for(var i=0; i< 8; i++){
-       this.causeButton[i]=this.clipboard.addBlankButton(-800 + 200*Math.floor(i/4), 200+200*(i%4), "causebutton", i);
+    for(var i=0; i< 6; i++){
+       this.causeButton[i]=this.clipboard.addBlankButton(-800 + 200*Math.floor(i/3), 200+200*(i%3), "causebutton", i);
 		
 	 }
     //generating disease button
@@ -231,6 +231,13 @@ gameplayState.prototype.create = function(){
 		this.diseaseButton[i] = this.clipboard.addBlankButton(-300, 200+200*i, this.diseaseSprites[this.diseaseList[i]]);
 	}
 	
+	//adding plus, minus and equal sign
+    this.clipboard.add(-670, 200, "plus");
+    this.clipboard.add(-670, 400, "plus");
+    this.clipboard.add(-670, 600, "plus");
+    this.clipboard.add(-450, 200, "equal");
+    this.clipboard.add(-450, 400, "equal");
+    this.clipboard.add(-450, 600, "equal");
 	for(var i = this.diseaseList.length; i < 4; i++){
 		this.diseaseButton[i] = this.clipboard.addBlankButton(-300, 200+200*i, "diseasebutton");
 	}
