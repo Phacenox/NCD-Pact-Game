@@ -24,7 +24,8 @@ gameplayState.prototype.preload = function(){
 	this.causeList = []; //random causes for this level
 	
 	this.diseaseNames = [];
-	this.causeText = [];
+	this.causeTexts = [];
+	this.causeSprites = [];
 	this.maleFirst = ["Aaron","Aiden","Alan","Aaron","Aiden","Alan","Alberto","Andre","Andrew","Anton","Arthur","Benjamin","Carlos","David","Diego","Dimitri","Dylan","Emile","Enzo","Ethan",
 	"Felix","Gunnar","Hugo","Ivan","Jan","Joel","Jonas","Jorge","Jose","Juan","Julian","Leon","Liam","Lucas","Magnus","Mario","Mathias","Matthew","Maximilian","Mohamed","Nathan","Noah",
 	"Oliver","Oscar","Pablo","Ren","Ricardo","Roland","Ryan","Sergei","Simon","Takumi","Vincente"];
@@ -49,15 +50,25 @@ gameplayState.prototype.preload = function(){
 	this.diseaseNames.push("Abdomina Cavae");
 	
 	//Cause Text
-	this.causeText.push("I work as a Construction Worker.");
-	this.causeText.push("I work as a Farmer.");
-	this.causeText.push("I work as a Teacher.");
-	this.causeText.push("I come from a wealthy family.");
-	this.causeText.push("I love the forest, it makes me feel like I’m connected to nature.");
-	this.causeText.push("This summer was blazing hot I sweat a pool every night!");
-	this.causeText.push("I’m somewhat of a shut it, I spend most of my time working or playing video games by myself.");
-	this.causeText.push("I tend to eat a lot my red meat, I just love a good steak you know?");
-	this.causeText.push("I’m a vegetarian, meat just doesn’t do well with my digestive system.");
+	this.causeTexts.push("I work as a Construction Worker.");
+	this.causeSprites.push("ConstructionCause");
+	this.causeTexts.push("I work as a Farmer.");
+	this.causeSprites.push("FarmCause");
+	this.causeTexts.push("I work as a Teacher.");
+	this.causeSprites.push("TeacherCause");
+	this.causeTexts.push("I come from a wealthy family.");
+	this.causeSprites.push("WealthyCause");
+	this.causeTexts.push("I love the forest, it makes me feel like I’m\nconnected to nature.");
+	this.causeSprites.push("ForestCause");
+	this.causeTexts.push("This summer was blazing hot. I sweat out a\npool every night!");
+	this.causeSprites.push("SummerCause");
+	this.causeTexts.push("I’m somewhat of a shut in, I spend most of my\ntime working or playing video games by myself.");
+	this.causeSprites.push("AntisocialCause");
+	this.causeTexts.push("I tend to eat a lot my red meat. I just love a\ngood steak, you know?");
+	this.causeSprites.push("MeatCause");
+	this.causeTexts.push("I’m a vegetarian, meat just doesn’t do well\nwith my digestive system.");
+	this.causeSprites.push("VegetarianCause");
+		
 	
 	//Generate Disease Data
 	this.tempRand = 0;
@@ -94,11 +105,11 @@ gameplayState.prototype.preload = function(){
 	}else{
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
-	this.peopleData.push(this.causeText[this.causeList[0]]);
-	this.peopleData.push(this.causeText[this.causeList[1]]);
-	this.peopleData.push("");
-	this.peopleData.push("");
-	this.peopleData.push("");
+	this.peopleData.push(this.causeList[0]);
+	this.peopleData.push(this.causeList[1]);
+	this.peopleData.push(-1);
+	this.peopleData.push(-1);
+	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
 	this.peopleSprites.push(this.diseaseList[0]+1);
 	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
@@ -111,11 +122,11 @@ gameplayState.prototype.preload = function(){
 	}else{
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
-	this.peopleData.push(this.causeText[this.causeList[1]]);
-	this.peopleData.push(this.causeText[this.causeList[2]]);
-	this.peopleData.push(this.causeText[this.causeList[3]]);
-	this.peopleData.push("");
-	this.peopleData.push("");
+	this.peopleData.push(this.causeList[1]);
+	this.peopleData.push(this.causeList[2]);
+	this.peopleData.push(this.causeList[3]);
+	this.peopleData.push(-1);
+	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
 	this.peopleSprites.push(this.diseaseList[1]+1);
 	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
@@ -128,11 +139,11 @@ gameplayState.prototype.preload = function(){
 	}else{
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
-	this.peopleData.push(this.causeText[this.causeList[0]]);
-	this.peopleData.push(this.causeText[this.causeList[2]]);
-	this.peopleData.push(this.causeText[this.causeList[3]]);
-	this.peopleData.push("");
-	this.peopleData.push("");
+	this.peopleData.push(this.causeList[0]);
+	this.peopleData.push(this.causeList[2]);
+	this.peopleData.push(this.causeList[3]);
+	this.peopleData.push(-1);
+	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
 	this.peopleSprites.push(this.diseaseList[2]+1);
 	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
@@ -218,7 +229,7 @@ gameplayState.prototype.update = function(){
 				this.causeText[i] = new draggableText(1579 + 915, 488+122*i + 5*Math.floor(i/2)+ 1*Math.floor(i/4),"causetext2", this.causeButton, this.clipboard, this._clipboardButton, this.personInfo, this.causeButtonFinals);
 			}else
 				this.causeText[i] = new draggableText(1579, 488+122*i+ 5*Math.floor(i/2)+ 1*Math.floor(i/4),"causetext2", this.causeButton, this.clipboard, this._clipboardButton, this.personInfo, this.causeButtonFinals);
-			this.causeText[i].setDValue(i);
+			this.causeText[i].setDValue(this.peopleData[personquery*5+i], this.causeSprites[this.peopleData[personquery*5+i]]);
 			let cText = this.causeText[i].getSprite();
 			this.causeText[i].setOrigin(1579, 488+122*i+ 5*Math.floor(i/2)+ 1*Math.floor(i/4));
 			this.personInfo.adddraggable(cText);
@@ -231,9 +242,15 @@ gameplayState.prototype.update = function(){
 		}
 		this.currentPerson = personquery;
 		this.personInfo.openMenu();
-		this.personInfo.setData(this.peopleNames[personquery], this.peopleSprites[personquery*3+0], this.peopleSprites[personquery*3+1], this.peopleSprites[personquery*3+2], this.peopleData[personquery*5+0], this.peopleData[personquery*5+1], this.peopleData[personquery*5+2], this.peopleData[personquery*5+3], this.peopleData[personquery*5+4]);
+		var dat = ["", "", "", "", ""];
+		for(var i = 0; i < 5; i++){
+			if(this.peopleData[personquery*5+i] > -1)
+				dat[i] = this.causeTexts[this.peopleData[personquery*5+i]];
+		}
+		this.personInfo.setData(this.peopleNames[personquery], this.peopleSprites[personquery*3+0], this.peopleSprites[personquery*3+1], this.peopleSprites[personquery*3+2], dat[0], dat[1], dat[2], dat[3], dat[4]);
 		this.townArea.removePerson(this.currentPerson);
 	}
+	this.checkWin();
 
 	/*
     this.zerozero = game.physics.arcade.overlap(this.causeText[0].getSprite(), this.causeButton[0], overlap);
@@ -309,6 +326,17 @@ gameplayState.prototype.update = function(){
     
 
 };
+
+gameplayState.prototype.checkWin = function(){
+	var correctvalue = 0;
+	for(var i = 0; i < 8; i++){
+		if(this.causeButtonFinals[i] !== null){
+			if(this.causeButtonFinals[i].getDValue !== -1)
+				correctvalue++;
+		}
+	}
+	return correctvalue;
+}
 
 function overlap ()
 

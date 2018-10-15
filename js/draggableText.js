@@ -19,8 +19,9 @@ let draggableText = function(x, y, name, csbutton, clpbrd, btn, drg, cbf){
 	
 };
 
-draggableText.prototype.setDValue = function(x){
+draggableText.prototype.setDValue = function(x, sprite){
 	this.diseaseValue = x;
+	this.causeText.loadTexture(sprite);
 }
 
 draggableText.prototype.getDValue = function(){
@@ -48,9 +49,31 @@ draggableText.prototype.destroy = function(){
 	this.causeText.destroy();
 }
 
-function onDragStart()
+function onDragStart(sprite, pointer)
 {
    this.drag.play("",0,1);
+   if (sprite.x<this._clipboardButton.x)
+   {
+      
+		this.xpos = 1;
+		this.ypos = 0;
+		
+		if (sprite.x< this.causeButton[4].x-100){
+			this.xpos = 0;
+		}
+		if(sprite.y>this.causeButton[1].y-100 && sprite.y<this.causeButton[2].y-100){
+			this.ypos = 1;
+		}
+		else if (sprite.y>this.causeButton[2].y-100 && sprite.y<this.causeButton[3].y-100){
+			this.ypos = 2;
+		}
+		else if (sprite.y>this.causeButton[3].y-100){
+			this.ypos = 3;
+		}
+		
+		this.causeButtonFinals[this.xpos + this.ypos*2] = null;
+    }
+   
 }
 
 
@@ -59,12 +82,10 @@ function onDragStop(sprite, pointer){
     this.drop.play("",0,1);
     if (sprite.x<this._clipboardButton.x)
    {
-      
-  if (sprite.x>this.causeButton[4].x-100){
-    
-    //  console.log(sprite.x);
 		this.xpos = 1;
 		this.ypos = 0;
+      
+		if (sprite.x>this.causeButton[4].x-100){
      
         sprite.x =this.causeButton[4].x;
        }
