@@ -78,8 +78,16 @@ gameplayState.prototype.preload = function(){
 			this.diseaseList.push(this.tempRand);
 			continue;
 		}
-		while(this.diseaseList[i-1] === this.tempRand){
-			this.tempRand = this.game.rnd.integerInRange(0, 10);
+		var d = true;
+		while(d){
+			d = false;
+			for(var j = 0; j < i;j++){
+				if(this.diseaseList[j] === this.tempRand){
+					this.tempRand = this.game.rnd.integerInRange(0, 10);
+					d = true;
+					break;
+				}
+			}	
 		}
 		this.diseaseList.push(this.tempRand);
 	}
@@ -91,8 +99,16 @@ gameplayState.prototype.preload = function(){
 			this.causeList.push(this.tempRand);
 			continue;
 		}
-		while(this.causeList[i-1] === this.tempRand){
-			this.tempRand = this.game.rnd.integerInRange(0, 8);
+		var d = true;
+		while(d){
+			d = false;
+			for(var j = 0; j < i;j++){
+				if(this.causeList[j] === this.tempRand){
+					this.tempRand = this.game.rnd.integerInRange(0, 10);
+					d = true;
+					break;
+				}
+			}	
 		}
 		this.causeList.push(this.tempRand);
 	}
