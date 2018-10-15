@@ -227,9 +227,12 @@ gameplayState.prototype.create = function(){
 	 }
     //generating disease button
 
-	
-	for(var i = 0; i < 4; i++){
+	for(var i = 0; i < this.diseaseList.length; i++){
 		this.diseaseButton[i] = this.clipboard.addBlankButton(-300, 200+200*i, this.diseaseSprites[this.diseaseList[i]]);
+	}
+	
+	for(var i = this.diseaseList.length; i < 4; i++){
+		this.diseaseButton[i] = this.clipboard.addBlankButton(-300, 200+200*i, "diseasebutton");
 	}
 	
 	
