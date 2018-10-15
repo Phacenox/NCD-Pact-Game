@@ -26,6 +26,7 @@ gameplayState.prototype.preload = function(){
 	this.diseaseNames = [];
 	this.causeTexts = [];
 	this.causeSprites = [];
+	this.diseaseSprites = [];
 	this.maleFirst = ["Aaron","Aiden","Alan","Aaron","Aiden","Alan","Alberto","Andre","Andrew","Anton","Arthur","Benjamin","Carlos","David","Diego","Dimitri","Dylan","Emile","Enzo","Ethan",
 	"Felix","Gunnar","Hugo","Ivan","Jan","Joel","Jonas","Jorge","Jose","Juan","Julian","Leon","Liam","Lucas","Magnus","Mario","Mathias","Matthew","Maximilian","Mohamed","Nathan","Noah",
 	"Oliver","Oscar","Pablo","Ren","Ricardo","Roland","Ryan","Sergei","Simon","Takumi","Vincente"];
@@ -38,16 +39,27 @@ gameplayState.prototype.preload = function(){
 	
 	//Disease Names
 	this.diseaseNames.push("Cranium Combustum");
-	this.diseaseNames.push("Glacio-nasal Syndrome");	
+	this.diseaseSprites.push("firehead");
+	this.diseaseNames.push("Glacio-nasal Syndrome");
+	this.diseaseSprites.push("nose");
 	this.diseaseNames.push("Rubrum’s Syndrome");
+	this.diseaseSprites.push("redskin");
 	this.diseaseNames.push("Hitomi’s Disorder");
+	this.diseaseSprites.push("eyes");
 	this.diseaseNames.push("Dwarf Heart");
+	this.diseaseSprites.push("dwarf");
 	this.diseaseNames.push("Mindblow");
+	this.diseaseSprites.push("mindblow");
 	this.diseaseNames.push("Tenebrisium");
+	this.diseaseSprites.push("devil");
 	this.diseaseNames.push("Acorn Fever");
+	this.diseaseSprites.push("cheek");
 	this.diseaseNames.push("Limusium");
+	this.diseaseSprites.push("slime");
 	this.diseaseNames.push("Pentapox");
+	this.diseaseSprites.push("pentapox");
 	this.diseaseNames.push("Abdomina Cavae");
+	this.diseaseSprites.push("holetummy");
 	
 	//Cause Text
 	this.causeTexts.push("I work as a Construction Worker.");
@@ -215,10 +227,10 @@ gameplayState.prototype.create = function(){
 	 }
     //generating disease button
 
-    this.diseaseButton[0] = this.clipboard.addBlankButton(-300, 200, "diseasebutton");
-	this.diseaseButton[1] = this.clipboard.addBlankButton(-300, 200+200, "diseasebutton");
-	this.diseaseButton[2] = this.clipboard.addBlankButton(-300, 200+400, "diseasebutton");
-	this.diseaseButton[3] = this.clipboard.addBlankButton(-300, 200+600, "diseasebutton");
+	
+	for(var i = 0; i < 4; i++){
+		this.diseaseButton[i] = this.clipboard.addBlankButton(-300, 200+200*i, this.diseaseSprites[this.diseaseList[i]]);
+	}
 	
 	
     this.toggle = true;
