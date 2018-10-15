@@ -255,12 +255,12 @@ levelThree.prototype.create = function(){
 	this.townArea.create(this.numpeople);
 	this.townArea.addObject(1000, 500, 'hut');
 	this.townArea.addPlace(1095, 590);
-	this.townArea.addObject(1600, 250, 'hut');
-	this.townArea.addPlace(1695, 340);
-	this.townArea.addObject(1000, 500, 'hut');
-	this.townArea.addPlace(1095, 590);
-	this.townArea.addObject(1100, 150, 'hut');
-	this.townArea.addPlace(1195, 240);
+	this.townArea.addObject(1800, 150, 'hut');
+	this.townArea.addPlace(1895, 240);
+	this.townArea.addObject(700, 300, 'hut');
+	this.townArea.addPlace(795, 390);
+	this.townArea.addObject(1200, 140, 'hut');
+	this.townArea.addPlace(1295, 230);
 	
 	this.personInfo = new pullOutMenuRight(915, -1);
     this.personInfo.create();
@@ -368,6 +368,7 @@ levelThree.prototype.update = function(){
 	if(this.checkWin(0, 2) === 2)
 	{
 		if(this.toggle1){
+			this.toggle1 = false;
 			this.correct.play("",0,1);;
 		}
 		this.correctblock1.alpha = 1;
@@ -379,6 +380,7 @@ levelThree.prototype.update = function(){
     if(this.checkWin(2, 4) === 2)
     {
 		if(this.toggle2){
+			this.toggle2 = false;
 			this.correct.play("",0,1);;
 		}
 		this.correctblock2.alpha = 1;
@@ -390,6 +392,7 @@ levelThree.prototype.update = function(){
     if(this.checkWin(4, 6) === 2)
     {
 		if(this.toggle3){
+			this.toggle3 = false;
 			this.correct.play("",0,1);;
 		}
 		this.correctblock3.alpha = 1;
@@ -401,6 +404,7 @@ levelThree.prototype.update = function(){
     if(this.checkWin(6, 8) === 2)
     {
 		if(this.toggle4){
+			this.toggle4 = false;
 			this.correct.play("",0,1);;
 		}
 		this.correctblock4.alpha = 1;

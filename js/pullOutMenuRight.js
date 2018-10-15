@@ -117,6 +117,7 @@ pullOutMenuRight.prototype.smoothEquation = function(x){
 }
 
 pullOutMenuRight.prototype.openMenu = function(){
+	this.open.play("",0,1);
 	if(this.animating === 0){
 		if(!this.opened){
 			this.animating = 1;
