@@ -116,7 +116,7 @@ gameplayState.prototype.preload = function(){
 			d = false;
 			for(var j = 0; j < i;j++){
 				if(this.causeList[j] === this.tempRand){
-					this.tempRand = this.game.rnd.integerInRange(0, 10);
+					this.tempRand = this.game.rnd.integerInRange(0, 8);
 					d = true;
 					break;
 				}
@@ -124,6 +124,15 @@ gameplayState.prototype.preload = function(){
 		}
 		this.causeList.push(this.tempRand);
 	}
+	this.solution = [];
+	this.solution.push(this.causeList[0]);
+	this.solution.push(this.causeList[1]);
+	this.solution.push(this.causeList[1]);
+	this.solution.push(this.causeList[2]);
+	this.solution.push(this.causeList[3]);
+	this.solution.push(this.causeList[0]);
+	
+	this.commutative = [true, true, true, true];//true if addition, false if subtraction
 	
 	//person one
 	this.tempRand = this.game.rnd.integerInRange(0, 1);
@@ -243,11 +252,21 @@ gameplayState.prototype.create = function(){
     this.clipboard.add(-450, 400, "equal");
     this.clipboard.add(-450, 600, "equal");
 	
-    this.toggle = true;
+    this.toggle1 = true;
     this.toggle2 = true;
     this.toggle3 = true;
     this.toggle4 = true;
-    this.toggle5 = true;
+	
+	
+	this.correctblock1 = this.clipboard.add(this.diseaseButton[0].x-600,165, "correctblock");
+	this.correctblock1.alpha = 0;
+	this.correctblock2 = this.clipboard.add(this.diseaseButton[0].x-600,365, "correctblock");
+	this.correctblock2.alpha = 0;
+	this.correctblock3 = this.clipboard.add(this.diseaseButton[0].x-600,565, "correctblock");
+	this.correctblock3.alpha = 0;
+	this.correctblock4 = this.clipboard.add(this.diseaseButton[0].x-600,765, "correctblock");
+	this.correctblock4.alpha = 0;
+
 };
 
 gameplayState.prototype.update = function(){
@@ -287,89 +306,73 @@ gameplayState.prototype.update = function(){
 		this.personInfo.setData(this.peopleNames[personquery], this.peopleSprites[personquery*3+0], this.peopleSprites[personquery*3+1], this.peopleSprites[personquery*3+2], dat[0], dat[1], dat[2], dat[3], dat[4]);
 		this.townArea.removePerson(this.currentPerson);
 	}
-	this.checkWin();
-
-	/*
-    this.zerozero = game.physics.arcade.overlap(this.causeText[0].getSprite(), this.causeButton[0], overlap);
-    this.fourfour =game.physics.arcade.overlap(this.causeText[4].getSprite(), this.causeButton[4], overlap);
-    this.oneone = game.physics.arcade.overlap(this.causeText[1].getSprite(), this.causeButton[1], overlap);
-    this.fivefive =game.physics.arcade.overlap(this.causeText[5].getSprite(), this.causeButton[5], overlap);
-    this.twotwo = game.physics.arcade.overlap(this.causeText[2].getSprite(), this.causeButton[2], overlap);
-    this.sixsix =game.physics.arcade.overlap(this.causeText[6].getSprite(), this.causeButton[6], overlap);
-    this.threethree = game.physics.arcade.overlap(this.causeText[3].getSprite(), this.causeButton[3], overlap);
-    this.sevenseven =game.physics.arcade.overlap(this.causeText[7].getSprite(), this.causeButton[7], overlap);
-    
-
-
-
-  if(this.zerozero === true && this.fourfour ===true)
-  {
-      console.log("overlap");
- 
-      if (this.toggle2===true)
-      {this.toggle2 = false;
-      this.correctblock = this.clipboard.add(this.diseaseButton[0].x-600,165, "correctblock");
-          this.correct.play("",0,1);
-          this.correctblock.inputEnabled = false;
-          this.causeText[0].getSprite().body.immovable = true;
-         this.causeText[4].getSprite().body.immovable = true;
-      }
-  
-  }
-    if(this.oneone === true && this.fivefive ===true)
+	
+	if(this.checkWin(0, 2) === 2)
+	{
+		if(this.toggle1){
+			this.correct.play("",0,1);;
+		}
+		this.correctblock1.alpha = 1;
+		this.causeButtonFinals[0].getSprite().input.draggable = false;
+		this.causeButtonFinals[1].getSprite().input.draggable = false;
+	}else{
+		this.correctblock1.alpha = 0;
+	}
+    if(this.checkWin(2, 4) === 2)
     {
-        console.log("overlap");
-        
-        if (this.toggle3===true)
-        {this.toggle3 = false;
-            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-600,365, "correctblock");
-            this.correct.play("",0,1);
-            this.correctblock.inputEnabled = false;
-            this.causeText[0].getSprite().body.immovable = true;
-            this.causeText[4].getSprite().body.immovable = true;
-        }
-        
-    }
-    if(this.twotwo=== true && this.sixsix ===true)
+		if(this.toggle2){
+			this.correct.play("",0,1);;
+		}
+		this.correctblock2.alpha = 1;
+		this.causeButtonFinals[2].getSprite().input.draggable = false;
+		this.causeButtonFinals[3].getSprite().input.draggable = false;
+    }else{
+		this.correctblock2.alpha = 0;
+	}
+    if(this.checkWin(4, 6) === 2)
     {
-        console.log("overlap");
-        
-        if (this.toggle4===true)
-        {this.toggle4 = false;
-            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-600,565, "correctblock");
-            this.correct.play("",0,1);
-            this.correctblock.inputEnabled = false;
-            this.causeText[0].getSprite().body.immovable = true;
-            this.causeText[4].getSprite().body.immovable = true;
-        }
-        
-    }
-    if(this.threethree === true && this.sevenseven===true)
+		if(this.toggle3){
+			this.correct.play("",0,1);;
+		}
+		this.correctblock3.alpha = 1;
+		this.causeButtonFinals[4].getSprite().input.draggable = false;
+		this.causeButtonFinals[5].getSprite().input.draggable = false;
+    }else{
+		this.correctblock3.alpha = 0;
+	}
+    if(this.checkWin(6, 8) === 2)
     {
-        console.log("overlap");
-        
-        if (this.toggle5===true)
-        {this.toggle5 = false;
-            this.correctblock = this.clipboard.add(this.diseaseButton[0].x-600,765, "correctblock");
-            this.correct.play("",0,1);
-            this.correctblock.inputEnabled = false;
-            this.causeText[0].getSprite().body.immovable = true;
-            this.causeText[4].getSprite().body.immovable = true;
-        }
-        
-    }
-
-      */
-    
+		if(this.toggle4){
+			this.correct.play("",0,1);;
+		}
+		this.correctblock4.alpha = 1;
+		this.causeButtonFinals[6].getSprite().input.draggable = false;
+		this.causeButtonFinals[7].getSprite().input.draggable = false;
+    }else{
+		this.correctblock4.alpha = 0;
+	}
 
 };
 
-gameplayState.prototype.checkWin = function(){
+gameplayState.prototype.checkWin = function(x, y){
+	
 	var correctvalue = 0;
-	for(var i = 0; i < 8; i++){
+	for(var i = x; i < y; i++){
+		
 		if(this.causeButtonFinals[i] !== null){
-			if(this.causeButtonFinals[i].getDValue !== -1)
+			if(this.commutative[Math.floor(i/2)]){
+				if(this.causeButtonFinals[i].getDValue() === this.solution[i]){
 				correctvalue++;
+				}else if(i% 2 === 0 && this.causeButtonFinals[i].getDValue() === this.solution[i+1]){
+					correctvalue++;
+				}else if(i% 2 === 1 && this.causeButtonFinals[i].getDValue() === this.solution[i-1]){
+					correctvalue++;
+				}
+			}else{
+				if(this.causeButtonFinals[i].getDValue() === this.solution[i]){
+					correctvalue++;
+				}
+			}
 		}
 	}
 	return correctvalue;
