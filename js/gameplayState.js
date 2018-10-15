@@ -214,14 +214,13 @@ gameplayState.prototype.create = function(){
 		
 	 }
     //generating disease button
-    for(var i=0; i< 4; i++){
-         this.diseaseButton[i] = this.clipboard.addBlankButton(-300, 200+200*i, "diseasebutton", i);
-    }
-	
-	
-	
 
-
+    this.diseaseButton[0] = this.clipboard.addBlankButton(-300, 200, "diseasebutton");
+	this.diseaseButton[1] = this.clipboard.addBlankButton(-300, 200+200, "diseasebutton");
+	this.diseaseButton[2] = this.clipboard.addBlankButton(-300, 200+400, "diseasebutton");
+	this.diseaseButton[3] = this.clipboard.addBlankButton(-300, 200+600, "diseasebutton");
+	
+	
     this.toggle = true;
     this.toggle2 = true;
     this.toggle3 = true;
