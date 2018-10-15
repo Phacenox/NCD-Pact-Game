@@ -70,6 +70,11 @@ personMini.prototype.create = function(index, x, y, gender, spritesheetX, sprite
     }
 	this.hitbox.events.onInputUp.add(this.actiononClickUp, this);
 	objectLayer.add(this.allParts);
+	
+	this.sprite.scale.setTo(2, 2);
+	this.hitbox.scale.setTo(2, 2);
+	this.spriteCopy.scale.setTo(2,2);
+	
 	return this.sprite;
 };
 

@@ -24,5 +24,5 @@ startState.prototype.update = function(){
 };
 
 actiononClick = function(){
-	game.state.start("Game");
+	game.state.start("Intro");
 };
