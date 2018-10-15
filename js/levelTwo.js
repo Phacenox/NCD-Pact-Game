@@ -1,4 +1,4 @@
-let gameplayState = function(){
+let levelTwo = function(){
 	this.score = 0;
     this.causeButton=[];
 	
@@ -14,7 +14,7 @@ let gameplayState = function(){
 	this.causeButtonDraggables = [];
 };
 
-gameplayState.prototype.preload = function(){
+levelTwo.prototype.preload = function(){
     //data is stored with integers in mind
 	this.numpeople = 0;
 	this.peopleNames = [];
@@ -107,7 +107,7 @@ gameplayState.prototype.preload = function(){
 	}
 	
 	//Generate Cause Data
-	for(var i = 0; i < 4;i++){
+	for(var i = 0; i < 5;i++){
 		this.tempRand = this.game.rnd.integerInRange(0, 8);
 		if(i === 0){
 			this.causeList.push(this.tempRand);
@@ -127,14 +127,14 @@ gameplayState.prototype.preload = function(){
 		this.causeList.push(this.tempRand);
 	}
 	this.solution = [];
-	this.solution.push(this.causeList[0]);
-	this.solution.push(this.causeList[1]);
-	this.solution.push(this.causeList[1]);
 	this.solution.push(this.causeList[2]);
 	this.solution.push(this.causeList[3]);
 	this.solution.push(this.causeList[0]);
+	this.solution.push(this.causeList[2]);
+	this.solution.push(this.causeList[3]);
+	this.solution.push(this.causeList[1]);
 	
-	this.commutative = [true, true, true, true];//true if addition, false if subtraction
+	this.commutative = [true, false, true, true];//true if addition, false if subtraction
 	
 	//person zero
 	this.tempRand = this.game.rnd.integerInRange(0, 1);
@@ -145,12 +145,12 @@ gameplayState.prototype.preload = function(){
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
 	this.peopleData.push(this.causeList[0]);
+	this.peopleData.push(this.causeList[3]);
 	this.peopleData.push(this.causeList[2]);
 	this.peopleData.push(-1);
 	this.peopleData.push(-1);
-	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
-	this.peopleSprites.push(0);
+	this.peopleSprites.push(this.diseaseList[0]+1);
 	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
 	
 	
@@ -168,7 +168,7 @@ gameplayState.prototype.preload = function(){
 	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
-	this.peopleSprites.push(this.diseaseList[0]+1);
+	this.peopleSprites.push(this.diseaseList[1]+1);
 	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
 	
 	//person two
@@ -179,9 +179,9 @@ gameplayState.prototype.preload = function(){
 	}else{
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
-	this.peopleData.push(this.causeList[1]);
-	this.peopleData.push(this.causeList[2]);
+	this.peopleData.push(this.causeList[0]);
 	this.peopleData.push(this.causeList[3]);
+	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
@@ -196,9 +196,9 @@ gameplayState.prototype.preload = function(){
 	}else{
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
-	this.peopleData.push(this.causeList[0]);
-	this.peopleData.push(this.causeList[2]);
+	this.peopleData.push(this.causeList[1]);
 	this.peopleData.push(this.causeList[3]);
+	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
@@ -206,7 +206,7 @@ gameplayState.prototype.preload = function(){
 	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
 };
 
-gameplayState.prototype.create = function(){
+levelTwo.prototype.create = function(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
     this.background = game.add.audio("background",1);
     this.background.play("",0,1,true);
@@ -266,7 +266,7 @@ gameplayState.prototype.create = function(){
 	
     //adding plus, minus and equal sign
     this.clipboard.add(-670, 200, "plus");
-    this.clipboard.add(-670, 400, "plus");
+    this.clipboard.add(-670, 400, "minus");
     this.clipboard.add(-670, 600, "plus");
     this.clipboard.add(-450, 200, "equal");
     this.clipboard.add(-450, 400, "equal");
@@ -289,7 +289,7 @@ gameplayState.prototype.create = function(){
 
 };
 
-gameplayState.prototype.update = function(){
+levelTwo.prototype.update = function(){
 	this.clipboard.update();
 	this.personInfo.update();
     game.physics.arcade.overlap(this.causeText1, this.clipboard.causeButton[0], overlap);
@@ -373,12 +373,12 @@ gameplayState.prototype.update = function(){
 	}
 	if(this.nextlevelToggle && this.checkWin(0, 6) === 6){
 		this.nextlevelToggle = false;
-		this.nextbutton = new nextLevelButton(game.world.centerX, game.world.centerY, '12state');
+		this.nextbutton = new nextLevelButton(game.world.centerX, game.world.centerY, '23state');
 	}
 
 };
 
-gameplayState.prototype.checkWin = function(x, y){
+levelTwo.prototype.checkWin = function(x, y){
 	
 	var correctvalue = 0;
 	for(var i = x; i < y; i++){

@@ -1,4 +1,4 @@
-let gameplayState = function(){
+let levelThree = function(){
 	this.score = 0;
     this.causeButton=[];
 	
@@ -14,7 +14,7 @@ let gameplayState = function(){
 	this.causeButtonDraggables = [];
 };
 
-gameplayState.prototype.preload = function(){
+levelThree.prototype.preload = function(){
     //data is stored with integers in mind
 	this.numpeople = 0;
 	this.peopleNames = [];
@@ -86,7 +86,7 @@ gameplayState.prototype.preload = function(){
 	
 	//Generate Disease Data
 	this.tempRand = 0;
-	for(var i = 0; i < 3;i++){
+	for(var i = 0; i < 4;i++){
 		this.tempRand = this.game.rnd.integerInRange(0, 10);
 		if(i === 0){
 			this.diseaseList.push(this.tempRand);
@@ -107,7 +107,7 @@ gameplayState.prototype.preload = function(){
 	}
 	
 	//Generate Cause Data
-	for(var i = 0; i < 4;i++){
+	for(var i = 0; i < 6;i++){
 		this.tempRand = this.game.rnd.integerInRange(0, 8);
 		if(i === 0){
 			this.causeList.push(this.tempRand);
@@ -130,11 +130,13 @@ gameplayState.prototype.preload = function(){
 	this.solution.push(this.causeList[0]);
 	this.solution.push(this.causeList[1]);
 	this.solution.push(this.causeList[1]);
-	this.solution.push(this.causeList[2]);
+	this.solution.push(this.causeList[5]);
 	this.solution.push(this.causeList[3]);
 	this.solution.push(this.causeList[0]);
+	this.solution.push(this.causeList[2]);
+	this.solution.push(this.causeList[1]);
 	
-	this.commutative = [true, true, true, true];//true if addition, false if subtraction
+	this.commutative = [false, true, true, true];//true if addition, false if subtraction
 	
 	//person zero
 	this.tempRand = this.game.rnd.integerInRange(0, 1);
@@ -144,9 +146,9 @@ gameplayState.prototype.preload = function(){
 	}else{
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
-	this.peopleData.push(this.causeList[0]);
-	this.peopleData.push(this.causeList[2]);
-	this.peopleData.push(-1);
+	this.peopleData.push(this.causeList[1]);
+	this.peopleData.push(this.causeList[3]);
+	this.peopleData.push(this.causeList[4]);
 	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
@@ -163,8 +165,8 @@ gameplayState.prototype.preload = function(){
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
 	this.peopleData.push(this.causeList[0]);
-	this.peopleData.push(this.causeList[1]);
-	this.peopleData.push(-1);
+	this.peopleData.push(this.causeList[4]);
+	this.peopleData.push(this.causeList[5]);
 	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
@@ -179,13 +181,13 @@ gameplayState.prototype.preload = function(){
 	}else{
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
-	this.peopleData.push(this.causeList[1]);
+	this.peopleData.push(this.causeList[0]);
 	this.peopleData.push(this.causeList[2]);
-	this.peopleData.push(this.causeList[3]);
+	this.peopleData.push(this.causeList[4]);
 	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
-	this.peopleSprites.push(this.diseaseList[1]+1);
+	this.peopleSprites.push(this.diseaseList[0]+1);
 	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
 	
 	//person three
@@ -197,16 +199,50 @@ gameplayState.prototype.preload = function(){
 		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
 	}
 	this.peopleData.push(this.causeList[0]);
-	this.peopleData.push(this.causeList[2]);
+	this.peopleData.push(this.causeList[1]);
+	this.peopleData.push(this.causeList[4]);
+	this.peopleData.push(this.causeList[5]);
+	this.peopleData.push(-1);
+	this.peopleSprites.push(this.tempRand);
+	this.peopleSprites.push(this.diseaseList[1]+1);
+	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
+	
+	//person four
+	this.tempRand = this.game.rnd.integerInRange(0, 1);
+	this.numpeople++;
+	if(this.tempRand === 1){
+		this.peopleNames.push(this.femaleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
+	}else{
+		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
+	}
+	this.peopleData.push(this.causeList[0]);
+	this.peopleData.push(this.causeList[1]);
 	this.peopleData.push(this.causeList[3]);
 	this.peopleData.push(-1);
 	this.peopleData.push(-1);
 	this.peopleSprites.push(this.tempRand);
 	this.peopleSprites.push(this.diseaseList[2]+1);
 	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
+	
+	//person five
+	this.tempRand = this.game.rnd.integerInRange(0, 1);
+	this.numpeople++;
+	if(this.tempRand === 1){
+		this.peopleNames.push(this.femaleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
+	}else{
+		this.peopleNames.push(this.maleFirst[this.game.rnd.integerInRange(0,52)] + " " + this.last[this.game.rnd.integerInRange(0,52)]);
+	}
+	this.peopleData.push(this.causeList[1]);
+	this.peopleData.push(this.causeList[2]);
+	this.peopleData.push(this.causeList[4]);
+	this.peopleData.push(-1);
+	this.peopleData.push(-1);
+	this.peopleSprites.push(this.tempRand);
+	this.peopleSprites.push(this.diseaseList[3]+1);
+	this.peopleSprites.push(this.game.rnd.integerInRange(0, 2));
 };
 
-gameplayState.prototype.create = function(){
+levelThree.prototype.create = function(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
     this.background = game.add.audio("background",1);
     this.background.play("",0,1,true);
@@ -265,12 +301,14 @@ gameplayState.prototype.create = function(){
 	}
 	
     //adding plus, minus and equal sign
-    this.clipboard.add(-670, 200, "plus");
+    this.clipboard.add(-670, 200, "minus");
     this.clipboard.add(-670, 400, "plus");
     this.clipboard.add(-670, 600, "plus");
+	this.clipboard.add(-670, 800, "plus");
     this.clipboard.add(-450, 200, "equal");
     this.clipboard.add(-450, 400, "equal");
     this.clipboard.add(-450, 600, "equal");
+	this.clipboard.add(-450, 800, "equal");
 	
     this.toggle1 = true;
     this.toggle2 = true;
@@ -289,7 +327,7 @@ gameplayState.prototype.create = function(){
 
 };
 
-gameplayState.prototype.update = function(){
+levelThree.prototype.update = function(){
 	this.clipboard.update();
 	this.personInfo.update();
     game.physics.arcade.overlap(this.causeText1, this.clipboard.causeButton[0], overlap);
@@ -371,14 +409,14 @@ gameplayState.prototype.update = function(){
     }else{
 		this.correctblock4.alpha = 0;
 	}
-	if(this.nextlevelToggle && this.checkWin(0, 6) === 6){
+	if(this.nextlevelToggle && this.checkWin(0, 8) === 8){
 		this.nextlevelToggle = false;
-		this.nextbutton = new nextLevelButton(game.world.centerX, game.world.centerY, '12state');
+		this.nextbutton = new nextLevelButton(game.world.centerX, game.world.centerY, 'endstate');
 	}
 
 };
 
-gameplayState.prototype.checkWin = function(x, y){
+levelThree.prototype.checkWin = function(x, y){
 	
 	var correctvalue = 0;
 	for(var i = x; i < y; i++){

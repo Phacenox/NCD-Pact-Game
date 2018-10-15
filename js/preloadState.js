@@ -58,6 +58,8 @@ preloadState.prototype.preload = function(){
 	game.load.image("WealthyCause", "assets/CauseIcons/WealthyCause.png");
 	game.load.image("WifeCause", "assets/CauseIcons/WifeCause.png");
 	
+	game.load.image("nextButton", "assets/NextLevelButton.png");
+	
     game.load.image("plus","assets/PlusSign.png");
     game.load.image("minus","assets/MinusSign.png");
     game.load.image("equal","assets/EqualSign.png");

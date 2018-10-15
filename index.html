@@ -10,8 +10,14 @@
 	<script type="text/javascript" src="js/startState.js"></script>
 	<script type="text/javascript" src="js/introState.js"></script>
 	<script type="text/javascript" src="js/gameplayState.js"></script>
+	<script type="text/javascript" src="js/levelTwo.js"></script>
+	<script type="text/javascript" src="js/levelThree.js"></script>
+	<script type="text/javascript" src="js/p12state.js"></script>
+	<script type="text/javascript" src="js/p23state.js"></script>
+	<script type="text/javascript" src="js/endstae.js"></script>
     <script type="text/javascript" src="js/draggableText.js"></script>
 	<script type="text/javascript" src="js/pullOutMenu.js"></script>
+	<script type="text/javascript" src="js/nextLevelButton.js"></script>
 	<script type="text/javascript" src="js/pullOutMenuRight.js"></script>
     <style type="text/css">
         body {
@@ -28,7 +34,14 @@
 	game.state.add("Preload", preloadState);
 	game.state.add("Start", startState);
 	game.state.add("Game", gameplayState);
+	game.state.add("level2", levelTwo);
+	game.state.add("level3", levelThree);
 	game.state.add("Intro", introState);
+	
+	game.state.add("12state", p12state);
+	game.state.add("23state", p23state);
+	game.state.add("endstate", endstate);
+	
 	game.state.start("Preload");
 	
 </script>
