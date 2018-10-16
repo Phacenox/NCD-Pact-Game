@@ -126,6 +126,8 @@ gameplayState.prototype.preload = function(){
 		}
 		this.causeList.push(this.tempRand);
 	}
+	
+	//these two arrays are used in checkwin
 	this.solution = [];
 	this.solution.push(this.causeList[0]);
 	this.solution.push(this.causeList[1]);
@@ -135,6 +137,7 @@ gameplayState.prototype.preload = function(){
 	this.solution.push(this.causeList[0]);
 	
 	this.commutative = [true, true, true, true];//true if addition, false if subtraction
+	
 	
 	//person zero
 	this.tempRand = this.game.rnd.integerInRange(0, 1);
@@ -215,6 +218,8 @@ gameplayState.prototype.create = function(){
 	let numpeople = 12;
 	this.townArea = new townArea();
 	this.townArea.create(this.numpeople);
+	
+	//add some buildings for the people to enter
 	this.townArea.addObject(1000, 500, 'hut');
 	this.townArea.addPlace(1095, 590);
 	this.townArea.addObject(1600, 250, 'hut');
@@ -222,6 +227,7 @@ gameplayState.prototype.create = function(){
 	this.townArea.addObject(1100, 150, 'hut');
 	this.townArea.addPlace(1195, 240);
 	
+	//right hand side menu
 	this.personInfo = new pullOutMenuRight(915, -1);
     this.personInfo.create();
 	this.personInfo.add(game.world.width - 63 - 20, 0, "clipboardright");
@@ -229,13 +235,13 @@ gameplayState.prototype.create = function(){
 	this.personInfo.initData();
 	let randompadding = 300;
   
-	
+	//left hand side menu
     this.clipboard = new pullOutMenu(915, 1);
     this.clipboard.create();
 	this.clipboard.add(-915, 0, "clipboard");
 	this._clipboardButton = this.clipboard.addButton(10, 465, "clipboardbutton");
    
-	   
+	//add the people to the town
 	for(var i = 0; i < this.numpeople; i++){
 		let randx = (game.rnd.integer() % (game.world.width - 2*randompadding)) + randompadding;
 		let randy = (game.rnd.integer() % (game.world.height - 2*randompadding)) + randompadding;
@@ -268,20 +274,13 @@ gameplayState.prototype.create = function(){
     this.clipboard.add(-450, 400, "equal");
     this.clipboard.add(-450, 600, "equal");
 	
-    this.toggle1 = true;
-    this.toggle2 = true;
-    this.toggle3 = true;
-    this.toggle4 = true;
+	this.toggles = [true, true, true, true];
 	
-	
-	this.correctblock1 = this.clipboard.add(this.diseaseButton[0].x-600,165, "correctblock");
-	this.correctblock1.alpha = 0;
-	this.correctblock2 = this.clipboard.add(this.diseaseButton[0].x-600,365, "correctblock");
-	this.correctblock2.alpha = 0;
-	this.correctblock3 = this.clipboard.add(this.diseaseButton[0].x-600,565, "correctblock");
-	this.correctblock3.alpha = 0;
-	this.correctblock4 = this.clipboard.add(this.diseaseButton[0].x-600,765, "correctblock");
-	this.correctblock4.alpha = 0;
+	this.correctblocks = [];
+	for(var i = 0; i < 4; i++){
+		this.correctblocks.push(this.clipboard.add(this.diseaseButton[0].x-600,165 + 200*i, "correctblock"));
+		this.correctblocks[i].alpha = 0;
+	}
 
 };
 
@@ -289,6 +288,8 @@ gameplayState.prototype.update = function(){
 	this.clipboard.update();
 	this.personInfo.update();
 	let personquery = this.townArea.update();
+	//if a person is dropped on the right pulloutmenu's button, townArea.update will return
+	//the data index value of that person
 	if(personquery != -1){
 		
 		this.personInfo.destroyDraggables();
@@ -305,7 +306,7 @@ gameplayState.prototype.update = function(){
 			this.personInfo.adddraggable(cText);
 			
 		}
-		
+		//re-add old person to town
 		if(this.currentPerson != -1){
 			let tmp = this.townArea.addPerson(this.currentPerson, this._personInfoButton.x + 20, this._personInfoButton.y + 50, this.peopleSprites[this.currentPerson*3+0], this.peopleSprites[this.currentPerson*3+1], this.peopleSprites[this.currentPerson*3+2], this._personInfoButton);
 			tmp.alphaAnimate()
@@ -317,58 +318,27 @@ gameplayState.prototype.update = function(){
 			if(this.peopleData[personquery*5+i] > -1)
 				dat[i] = this.causeTexts[this.peopleData[personquery*5+i]];
 		}
+		//update the menu with new data
 		this.personInfo.setData(this.peopleNames[personquery], this.peopleSprites[personquery*3+0], this.peopleSprites[personquery*3+1], this.peopleSprites[personquery*3+2], dat[0], dat[1], dat[2], dat[3], dat[4]);
 		this.townArea.removePerson(this.currentPerson);
 	}
 	
-	if(this.checkWin(0, 2) === 2)
-	{
-		if(this.toggle1){
-			this.toggle1 = false;
-			this.correct.play("",0,1);;
+	//displaying correct blocks for each formula if correct
+	for(var i = 0; i < 4; i++){
+		if(this.checkWin(i*2, (i*2)+2) === 2)
+		{
+			if(this.toggles[i]){
+				this.toggles[i] = false;
+				this.correct.play("",0,1);;
+			}
+			this.correctblocks[i].alpha = 1;
+			this.causeButtonFinals[i*2].getSprite().input.draggable = false;
+			this.causeButtonFinals[(i*2)+1].getSprite().input.draggable = false;
+		}else{
+			this.correctblocks[i].alpha = 0;
 		}
-		this.correctblock1.alpha = 1;
-		this.causeButtonFinals[0].getSprite().input.draggable = false;
-		this.causeButtonFinals[1].getSprite().input.draggable = false;
-	}else{
-		this.correctblock1.alpha = 0;
 	}
-    if(this.checkWin(2, 4) === 2)
-    {
-		if(this.toggle2){
-			this.toggle2 = false;
-			this.correct.play("",0,1);;
-		}
-		this.correctblock2.alpha = 1;
-		this.causeButtonFinals[2].getSprite().input.draggable = false;
-		this.causeButtonFinals[3].getSprite().input.draggable = false;
-    }else{
-		this.correctblock2.alpha = 0;
-	}
-    if(this.checkWin(4, 6) === 2)
-    {
-		if(this.toggle3){
-			this.toggle3 = false;
-			this.correct.play("",0,1);;
-		}
-		this.correctblock3.alpha = 1;
-		this.causeButtonFinals[4].getSprite().input.draggable = false;
-		this.causeButtonFinals[5].getSprite().input.draggable = false;
-    }else{
-		this.correctblock3.alpha = 0;
-	}
-    if(this.checkWin(6, 8) === 2)
-    {
-		if(this.toggle4){
-			this.toggle4 = false;
-			this.correct.play("",0,1);;
-		}
-		this.correctblock4.alpha = 1;
-		this.causeButtonFinals[6].getSprite().input.draggable = false;
-		this.causeButtonFinals[7].getSprite().input.draggable = false;
-    }else{
-		this.correctblock4.alpha = 0;
-	}
+	//check if next level req is met
 	if(this.nextlevelToggle && this.checkWin(0, 6) === 6){
 		this.nextlevelToggle = false;
 		this.nextbutton = new nextLevelButton(game.world.centerX, game.world.centerY, '12state');
@@ -377,7 +347,7 @@ gameplayState.prototype.update = function(){
 };
 
 gameplayState.prototype.checkWin = function(x, y){
-	
+	//checks the number of correct labels in the range of x to y-1
 	var correctvalue = 0;
 	for(var i = x; i < y; i++){
 		
