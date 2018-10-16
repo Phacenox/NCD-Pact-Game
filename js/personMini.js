@@ -179,7 +179,6 @@ personMini.prototype.animate = function(item){
 	item.body.y -= movement;
 }
 
-//todo: create a copy of the sprite object that appears over everything else
 personMini.prototype.actiononClickWoman= function(){
 	this.lastMouseX = game.input.x;
 	this.lastMouseY = game.input.y;
@@ -201,9 +200,6 @@ personMini.prototype.actiononClickMan= function(){
     
 };
 
-//todo: remove that sprite
-//todo: check collision with the drop box, if collision, send data and destroy self
-//idea, set variable in this class, on next frame return an index value through update.
 personMini.prototype.actiononClickUp = function(){
 	this.pickedUp = false;
 	if(this.hitbox.x + this.hitbox.width > this.personInfoButton.x && this.hitbox.y + this.hitbox.height > this.personInfoButton.y){
@@ -212,5 +208,4 @@ personMini.prototype.actiononClickUp = function(){
 		}
 	}
 	this.decreasingAlpha = true;
-	//this.drop.play("",0,1);
 };
