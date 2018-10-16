@@ -23,6 +23,8 @@ preloadState.prototype.preload = function(){
     game.load.image("clipboardbutton", "assets/clipboardButton.png");
     game.load.image("correctblock", "assets/correctblock.png");
 	game.load.image("town1", "assets/town1.png");
+	game.load.image("town2", "assets/town2.png");
+	game.load.image("town3", "assets/town3.png")
     game.load.audio("drag","assets/drag.wav");
     game.load.audio("drop","assets/drop.wav");
     game.load.audio("close","assets/close.wav");

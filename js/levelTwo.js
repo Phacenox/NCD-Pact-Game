@@ -210,7 +210,7 @@ levelTwo.prototype.create = function(){
     game.physics.startSystem(Phaser.Physics.ARCADE);
     this.correct = game.add.audio("correct",1);
     this.incorrect = game.add.audio("incorrect",1);
-	game.add.sprite(0, 0, "town1");
+	game.add.sprite(0, 0, "town2");
 	
 	let numpeople = 12;
 	this.townArea = new townArea();
