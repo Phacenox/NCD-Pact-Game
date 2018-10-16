@@ -223,6 +223,8 @@ levelTwo.prototype.create = function(){
 	this.townArea.addPlace(1095, 590);
 	this.townArea.addObject(800, 170, 'hut');
 	this.townArea.addPlace(895, 260);
+	this.townArea.addObject(1450, 750, 'hut');
+	this.townArea.addPlace(1545, 840);
 	
 	this.personInfo = new pullOutMenuRight(915, -1);
     this.personInfo.create();
