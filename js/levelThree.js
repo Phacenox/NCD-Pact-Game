@@ -328,8 +328,6 @@ levelThree.prototype.create = function(){
 levelThree.prototype.update = function(){
 	this.clipboard.update();
 	this.personInfo.update();
-    game.physics.arcade.overlap(this.causeText1, this.clipboard.causeButton[0], overlap);
-    game.physics.arcade.overlap(this.causeText2, this.clipboard.causeButton[1], overlap);
 	let personquery = this.townArea.update();
 	if(personquery != -1){
 		
@@ -441,12 +439,3 @@ levelThree.prototype.checkWin = function(x, y){
 	}
 	return correctvalue;
 }
-
-function overlap ()
-
-{
-   
-    //console.log("overlap");
-    
-}
-
