@@ -15,9 +15,11 @@ startState.prototype.create = function(){
 	_startButton.events.onInputDown.add(actiononClick, this);
 	
 	
-
-    this.background = game.add.audio("background",1);
-    this.background.play("",0,1,true);
+	if(!audio_played){
+		audio_played = true;
+		this.background = game.add.audio("background",1);
+		this.background.play("",0,1,true);
+	}
 	
 };
 
